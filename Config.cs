@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 using Discord;
 using Newtonsoft.Json;
 
@@ -39,5 +36,6 @@ namespace GarlicBot
         public string authKey;
         public string commandPrefix;
         public LogSeverity logLevel;
+        public string embedColor;
     }
 }

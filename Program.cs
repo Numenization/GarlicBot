@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;

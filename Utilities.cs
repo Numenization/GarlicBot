@@ -44,6 +44,35 @@ namespace GarlicBot
             }
         }
 
+        public static async Task<Color> ParseColor(string rgb)
+        {
+            int r;
+            int g;
+            int b;
+            string[] arr = rgb.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string s in arr)
+            {
+                s.Trim();
+            }
+            if(arr.Length == 3)
+            {
+                try
+                {
+                    r = int.Parse(arr[0]);
+                    g = int.Parse(arr[1]);
+                    b = int.Parse(arr[2]);
+                }
+                catch(Exception e)
+                {
+                    await Log("Error trying to parse color!\n" + e.Message, LogSeverity.Error);
+                    return new Color(255,255,255);
+                }
+
+                return new Color(r, g, b);
+            }
+            return new Color(255, 255, 255);
+        }
+
         private static Dictionary<string, string> _alerts;
     }
 }

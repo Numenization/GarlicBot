@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Reflection;
 using Discord;
 using Discord.WebSocket;
@@ -32,7 +31,11 @@ namespace GarlicBot
                     var result = await _service.ExecuteAsync(context, argPos);
                     if(!result.IsSuccess)
                     {
-                        await context.Channel.SendMessageAsync(await Utilities.GetAlert("commandNotFound"));
+                        var embed = new EmbedBuilder();
+                        embed.WithTitle("Command Error:");
+                        embed.WithDescription(await Utilities.GetAlert("commandNotFound"));
+                        embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                        await context.Channel.SendMessageAsync("", false, embed.Build());
                     }
                 }
             }
