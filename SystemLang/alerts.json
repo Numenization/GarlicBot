@@ -1,0 +1,5 @@
+﻿{
+  "commandNotFound": "Command not recognized.",
+  "noPermission": "You do not have the required permission to use this command.",
+  "restartMessage": "Restarting..."
+}
