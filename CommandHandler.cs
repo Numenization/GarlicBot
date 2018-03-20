@@ -23,7 +23,7 @@ namespace GarlicBot
             if(msg != null)
             {
                 SocketCommandContext context = new SocketCommandContext(_client, msg);
-                await Utilities.Log(context.User.Username + ": " + context.Message.Content, LogSeverity.Verbose);
+                await Utilities.Log($"{context.User.Username}: {context.Message.Content}", LogSeverity.Verbose);
                 int argPos = 0;
                 if (msg.HasStringPrefix(Config.bot.commandPrefix, ref argPos)
                     || msg.HasMentionPrefix(_client.CurrentUser, ref argPos))
@@ -32,7 +32,7 @@ namespace GarlicBot
                     if(!result.IsSuccess)
                     {
                         var embed = new EmbedBuilder();
-                        embed.WithTitle("Command Error:");
+                        embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
                         embed.WithDescription(await Utilities.GetAlert("commandNotFound"));
                         embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
                         await context.Channel.SendMessageAsync("", false, embed.Build());

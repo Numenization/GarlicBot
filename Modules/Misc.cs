@@ -25,7 +25,7 @@ namespace GarlicBot.Modules
         {
             IDisposable dispose = Context.Channel.EnterTypingState();
             var embed = new EmbedBuilder();
-            embed.WithTitle("Command Error:");
+            embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
             embed.WithDescription(String.Format(await Utilities.GetAlert("commandTooFewArgs"), "echo"));
             embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
             await Context.Channel.SendMessageAsync("", false, embed.Build());
@@ -44,13 +44,13 @@ namespace GarlicBot.Modules
             }
             catch (Exception e)
             {
-                pre = "Couldn't parse argument, default to 6 sides (" + e.Message + ")\n";
+                pre = await Utilities.GetAlert("rollCommandCouldntParse");
             }
             var embed = new EmbedBuilder();
-            embed.WithTitle("Roll the Dice (" + sides + " sides):");
+            embed.WithTitle(String.Format(await Utilities.GetAlert("rollOutput"), sides));
             Random r = new Random();
             int result = (r.Next() % sides) + 1;
-            embed.WithDescription(pre + "Result: " + result);
+            embed.WithDescription(String.Format(await Utilities.GetAlert("rollResult"), pre, result));
             embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
             await Context.Channel.SendMessageAsync("", false, embed.Build());
             dispose.Dispose();
@@ -62,10 +62,10 @@ namespace GarlicBot.Modules
             IDisposable dispose = Context.Channel.EnterTypingState();
             int sides = 6;
             var embed = new EmbedBuilder();
-            embed.WithTitle("Roll the Dice (" + sides + " sides):");
+            embed.WithTitle(String.Format(await Utilities.GetAlert("rollOutput"), sides));
             Random r = new Random();
             int result = (r.Next() % sides) + 1;
-            embed.WithDescription("Result: " + result);
+            embed.WithDescription(String.Format(await Utilities.GetAlert("rollResult"), "", result));
             embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
             await Context.Channel.SendMessageAsync("", false, embed.Build());
             dispose.Dispose();
