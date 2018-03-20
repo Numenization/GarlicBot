@@ -1,5 +1,7 @@
 ﻿{
   "commandNotFound": "Command not recognized.",
   "noPermission": "You do not have the required permission to use this command.",
-  "restartMessage": "Restarting..."
+  "restartMessage": "Restarting...",
+  "missingAuthKey": "Authentication key missing!",
+  "commandTooFewArgs": "Too few arguments for command {0}"
 }

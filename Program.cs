@@ -15,7 +15,7 @@ namespace GarlicBot
         { 
             if(Config.bot.authKey == "" || Config.bot.authKey == null)
             {
-                // error message
+                await Utilities.Log(await Utilities.GetAlert("missingAuthKey"), LogSeverity.Error);
                 return;
             }
             _client = new DiscordSocketClient(new DiscordSocketConfig
@@ -38,6 +38,7 @@ namespace GarlicBot
                 if(input.ToLower() == "restart")
                 {
                     await Restart();
+                    running = false;
                 }
                 else if(input.ToLower() == "exit" || input.ToLower() == "close")
                 {
