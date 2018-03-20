@@ -42,7 +42,7 @@ namespace GarlicBot
                 }
                 else if(input.ToLower() == "exit" || input.ToLower() == "close")
                 {
-                    await Utilities.Log("[Console] Closing GarlicBot...", LogSeverity.Info);
+                    Console.WriteLine("[Console] Closing GarlicBot...");
                     Environment.Exit(0);
                 }
                 else if(input.ToLower() == "help")
@@ -54,7 +54,7 @@ namespace GarlicBot
                 }
                 else
                 {
-                    Console.WriteLine("[Console] Invalid command \"" + input + "\"");
+                    Console.WriteLine($"[Console] Invalid command \"{input}\"");
                 }
             }
 
@@ -63,7 +63,8 @@ namespace GarlicBot
 
         private async Task Log(LogMessage msg)
         {
-            Console.WriteLine("[" + msg.Source + "] " + msg.Message);
+            Console.WriteLine($"[{msg.Source}] {msg.Message}");
+            await Utilities.WriteToLogFile(msg);
         }
 
         public static async Task Restart()

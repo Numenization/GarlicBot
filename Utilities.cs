@@ -31,7 +31,7 @@ namespace GarlicBot
             }
             else
             {
-                await Log("Could not find alert \"" + key + "\" in json!", LogSeverity.Error);
+                await Log($"Could not find alert \"{key}\" in json!", LogSeverity.Error);
                 return "";
             }
         }
@@ -40,7 +40,8 @@ namespace GarlicBot
         {
             if(level <= Config.bot.logLevel)
             {
-                Console.WriteLine("[GarlicBot] " + msg);
+                Console.WriteLine($"[GarlicBot] {msg}");
+                await WriteToLogFile(msg, "GarlicBot");
             }
         }
 
@@ -64,7 +65,7 @@ namespace GarlicBot
                 }
                 catch(Exception e)
                 {
-                    await Log("Error trying to parse color!\n" + e.Message, LogSeverity.Error);
+                    await Log($"Error trying to parse color!\n{e.Message}", LogSeverity.Error);
                     return new Color(255,255,255);
                 }
 
@@ -73,6 +74,55 @@ namespace GarlicBot
             return new Color(255, 255, 255);
         }
 
+        public static async Task WriteToLogFile(string msg)
+        {
+            if(logFile == null)
+            {
+                if(!Directory.Exists("Logs"))
+                {
+                    Directory.CreateDirectory("Logs");
+                }
+                logFile = new StreamWriter($"Logs/{DateTime.UtcNow.ToFileTime()}_Log.txt", true);
+                logFile.AutoFlush = true;
+            }
+            await logFile.WriteLineAsync($"[GarlicBot] {msg}");
+        }
+
+        public static async Task WriteToLogFile(string msg, string source)
+        {
+            if (logFile == null)
+            {
+                if (!Directory.Exists("Logs"))
+                {
+                    Directory.CreateDirectory("Logs");
+                }
+                logFile = new StreamWriter($"Logs/{DateTime.UtcNow.ToFileTime()}_Log.txt", true);
+                logFile.AutoFlush = true;
+            }
+            await logFile.WriteLineAsync($"[{source}] {msg}");
+        }
+
+        public static async Task WriteToLogFile(LogMessage logMessage)
+        {
+            if (logFile == null)
+            {
+                if (!Directory.Exists("Logs"))
+                {
+                    Directory.CreateDirectory("Logs");
+                }
+                logFile = new StreamWriter($"Logs/{DateTime.UtcNow.ToFileTime()}_Log.txt", true);
+                logFile.AutoFlush = true;
+            }
+            await logFile.WriteLineAsync($"[{logMessage.Source}] {logMessage.Message}");
+        }
+
+        public static void CloseLogFile()
+        {
+            if (logFile == null) return;
+            logFile.Close();
+        }
+
+        private static StreamWriter logFile = null;
         private static Dictionary<string, string> _alerts;
     }
 }
