@@ -33,7 +33,7 @@ namespace GarlicBot
                     {
                         var embed = new EmbedBuilder();
                         embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                        embed.WithDescription(await Utilities.GetAlert("commandNotFound"));
+                        embed.WithDescription(await Utilities.GetAlert("commandNotFound") + " " + result.ErrorReason);
                         embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
                         await context.Channel.SendMessageAsync("", false, embed.Build());
                     }

@@ -2,6 +2,7 @@
 using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;
+using GarlicBot.Modules.Quotes;
 
 namespace GarlicBot
 {

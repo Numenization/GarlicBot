@@ -7,5 +7,8 @@
   "rollCommandCouldntParse": "Couldn't parse argument, default to 6 sides\n",
   "rollOutput": "Roll the Dice ({0} sides)",
   "rollResult": "{0}Result: `{1}`",
-  "commandTooFewArgs": "Too few arguments for command {0}"
+  "commandTooFewArgs": "Too few arguments for command {0}",
+  "quoteAdded": "Added quote",
+  "quoteAddedBody": "Added quote with author {0}",
+  "quoteTitle": "Quote:"
 }

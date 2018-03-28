@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace GarlicBot
+namespace GarlicBot.Modules.Quotes
 {
     class QuoteManager
     {
