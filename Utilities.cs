@@ -19,7 +19,7 @@ namespace GarlicBot
             }
             catch(FileNotFoundException e)
             {
-                // log an error
+                Log("SystemLang folder not found!", LogSeverity.Error);
             }
         }
 
@@ -47,9 +47,7 @@ namespace GarlicBot
 
         public static async Task<Color> ParseColor(string rgb)
         {
-            int r;
-            int g;
-            int b;
+            int r, g, b;
             string[] arr = rgb.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string s in arr)
             {
@@ -86,6 +84,20 @@ namespace GarlicBot
                 logFile.AutoFlush = true;
             }
             await logFile.WriteLineAsync($"[GarlicBot] {msg}");
+        }
+
+        public static void WriteToLogFileSync(string msg)
+        {
+            if (logFile == null)
+            {
+                if (!Directory.Exists("Logs"))
+                {
+                    Directory.CreateDirectory("Logs");
+                }
+                logFile = new StreamWriter($"Logs/{DateTime.UtcNow.ToFileTime()}_Log.txt", true);
+                logFile.AutoFlush = true;
+            }
+            logFile.WriteLine($"[GarlicBot] {msg}");
         }
 
         public static async Task WriteToLogFile(string msg, string source)

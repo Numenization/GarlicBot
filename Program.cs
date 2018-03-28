@@ -26,31 +26,42 @@ namespace GarlicBot
 
             await _client.LoginAsync(TokenType.Bot, Config.bot.authKey);
             await _client.StartAsync();
-            await Utilities.Log("Bot is connected and running. Type \"help\" to see available console commands.", LogSeverity.Info);
             Client = _client;
 
             _handler = new CommandHandler(_client);
 
+            _client.Ready += async ()=> {
+                // Bot is ready, initialize console command input
+                await Utilities.Log("Bot is connected and running. Type \"help\" to see available console commands.", LogSeverity.Info);
+            };
+
             bool running = true;
-            while(running)
+            while (running)
             {
                 string input = Console.ReadLine();
-                if(input.ToLower() == "restart")
+                if (input.ToLower() == "restart")
                 {
                     await Restart();
                     running = false;
                 }
-                else if(input.ToLower() == "exit" || input.ToLower() == "close")
+                else if (input.ToLower() == "exit" || input.ToLower() == "close")
                 {
                     Console.WriteLine("[Console] Closing GarlicBot...");
                     Environment.Exit(0);
                 }
-                else if(input.ToLower() == "help")
+                else if (input.ToLower() == "help")
                 {
                     Console.WriteLine("[Console] GarlicBot Console Commands:");
                     Console.WriteLine(" - restart : Refreshes the bot");
                     Console.WriteLine(" - exit    : Safely logs out and closes the application");
                     Console.WriteLine(" - help    : Shows this text");
+                }
+                else if (input.ToLower() == "showquotes")
+                {
+                    foreach(Quote q in QuoteManager.quotes)
+                    {
+                        Console.WriteLine($"Author: {q.author}\nText: {q.text}\nDate:{q.date}");
+                    }
                 }
                 else
                 {

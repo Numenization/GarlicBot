@@ -12,15 +12,15 @@ namespace GarlicBot
             {
                 Directory.CreateDirectory(configFolder);
             }
-            if(!File.Exists(configFolder + "/" + configFile))
+            if(!File.Exists($"{configFolder}/{configFile}"))
             {
                 bot = new BotConfig();
                 string json = JsonConvert.SerializeObject(bot, Formatting.Indented);
-                File.WriteAllText(configFolder + "/" + configFile, json);
+                File.WriteAllText($"{configFolder}/{configFile}", json);
             }
             else
             {
-                string json = File.ReadAllText(configFolder + "/" + configFile);
+                string json = File.ReadAllText($"{configFolder}/{configFile}");
                 bot = JsonConvert.DeserializeObject<BotConfig>(json);
             }
         }
@@ -31,11 +31,13 @@ namespace GarlicBot
         private const string configFile = "config.json";
     }
 
-    public struct BotConfig
+    public class BotConfig
     {
-        public string authKey;
-        public string commandPrefix;
-        public LogSeverity logLevel;
-        public string embedColor;
+        public string authKey = "";
+        public string commandPrefix = "!";
+        public string botName = "GarlicBot";
+        public string botIconURL = "https://i.imgur.com/NFS0WeC.jpg";
+        public LogSeverity logLevel = LogSeverity.Verbose;
+        public string embedColor = "140,60,60";
     }
 }

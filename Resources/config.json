@@ -1,6 +1,8 @@
 {
   "authKey": "",
   "commandPrefix": "!",
+  "botName": "GarlicBot",
+  "botIconURL": "https://i.imgur.com/NFS0WeC.jpg",
   "logLevel": 4,
   "embedColor": "140,60,60"
 }
