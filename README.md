@@ -17,4 +17,7 @@ Some stuff it currently supports:
 4. Get your bot's authentication token and put it in the config file
 5. Run it
    - On windows, run GarlicBot.bat
-   - On anything else, run it from the terminal
+   - On anything else, run it from the terminal using the command:
+     ```
+	 dotnet GarlicBot.dll
+	 ```
