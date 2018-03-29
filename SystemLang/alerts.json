@@ -2,7 +2,7 @@
   "commandErrorTitle": "Command Error:",
   "commandNotFound": "Command not recognized.",
   "commandTooFewArgs": "Too few arguments for command {0}",
-  "firstTimeRunning": "Hello! This looks like it is your first time running GarlicBot.\nAresources folder has been created with a config file.\nPlease add your bot's authentication token to the config file.",
+  "firstTimeRunning": "Hello! This looks like it is your first time running GarlicBot.\n[GarlicBot] A resources folder has been created with a config file.\n[GarlicBot] Please add your bot's authentication token to the config file.",
   "missingAuthKey": "Authentication key missing!",
   "noPermission": "You do not have the required permission to use this command.",
   "quoteAdded": "Added quote",
