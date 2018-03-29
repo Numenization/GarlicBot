@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;
@@ -14,10 +15,14 @@ namespace GarlicBot
 
         public async Task StartAsync()
         { 
+            if(!Directory.Exists("Resources"))
+            {
+                await Utilities.Log(await Utilities.GetAlert("firstTimeRunning"), LogSeverity.Error);
+            }
             if(Config.bot.authKey == "" || Config.bot.authKey == null)
             {
                 await Utilities.Log(await Utilities.GetAlert("missingAuthKey"), LogSeverity.Error);
-                return;
+                await Task.Delay(-1);
             }
             _client = new DiscordSocketClient(new DiscordSocketConfig
             {
