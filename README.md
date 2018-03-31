@@ -15,7 +15,7 @@ Some stuff it currently supports:
 2. Unzip it somewhere
 3. Run it once to generate config file
    - On windows, run GarlicBot.bat
-   - On anything else, run it from the terminal using the command:
+   - On anything else, download the .NET Core and run the bot from the terminal using the command:
      ```
 	 dotnet GarlicBot.dll
 	 ```
