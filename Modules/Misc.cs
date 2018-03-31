@@ -12,12 +12,7 @@ namespace GarlicBot.Modules
         public async Task Help()
         {
             IDisposable dispose = Context.Channel.EnterTypingState();
-            var embed = new EmbedBuilder();
-            embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-            embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-            embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-
-            await Context.Channel.SendMessageAsync("", false, embed.Build());
+            await Context.Channel.SendMessageAsync("", false, await HelpManager.BuildEmbed());
             dispose.Dispose();
         }
 

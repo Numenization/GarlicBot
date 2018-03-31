@@ -6,6 +6,9 @@
     <StartupObject>GarlicBot.Program</StartupObject>
     <ApplicationIcon />
     <Win32Resource />
+    <Version>0.1</Version>
+    <Authors>Nicholas Spencer</Authors>
+    <Company />
   </PropertyGroup>
 
   <ItemGroup>

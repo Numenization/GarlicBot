@@ -14,8 +14,8 @@ namespace GarlicBot
 
 
         public async Task StartAsync()
-        { 
-            if(!Directory.Exists("Resources"))
+        {
+            if (!Directory.Exists("Resources"))
             {
                 await Utilities.Log(await Utilities.GetAlert("firstTimeRunning"), LogSeverity.Error);
             }

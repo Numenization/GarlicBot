@@ -1,0 +1,147 @@
+[Discord] Discord.Net v2.0.0-beta (API v6)
+[Rest] GET voice/regions: 346.42 ms
+[Gateway] Connecting
+[Rest] GET gateway: 254.5 ms
+[Gateway] Connected
+[Gateway] Connected to Bot Testing
+[GarlicBot] Bot is connected and running. Type "help" to see available console commands.
+[Gateway] Ready
+[GarlicBot] Numenization: !help
+[Rest] POST channels/425769735339114499/typing: 74.81 ms
+[Rest] POST channels/425769735339114499/messages: 135.78 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Drahlous: !addquote ,d,,rahl,ous ,,,,,,,@<,,,@,,≥,ò
+[Rest] POST channels/425769735339114499/typing: 93.17 ms
+[Rest] POST channels/425769735339114499/messages: 144.02 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Numenization: ,d,,rahl,ous ,,,,,,,@<,,,@,,≥,ò  3/30/2018 [20:24]
+[GarlicBot] Drahlous: !addquote drahlous NULL nullptr \0
+[Rest] POST channels/425769735339114499/typing: 96.22 ms
+[Rest] POST channels/425769735339114499/messages: 186.33 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Numenization: https://i.imgur.com/I0sK5HM.png
+[GarlicBot] Drahlous: !addquote drahlous NUL hello NUL world
+[Rest] POST channels/425769735339114499/typing: 77.65 ms
+[Rest] POST channels/425769735339114499/messages: 92.26 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Numenization: !getquote
+[Rest] POST channels/425769735339114499/messages: 97.52 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Numenization: !getquote
+[Rest] POST channels/425769735339114499/messages: 90.32 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Numenization: !getquote
+[Rest] POST channels/425769735339114499/messages: 102.21 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Numenization: !getquote
+[Rest] POST channels/425769735339114499/messages: 101.7 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Drahlous: !addquote \0 h\0e\0l\0l\0o \0w\0o\0r\0l\0d
+[Rest] POST channels/425769735339114499/typing: 83.68 ms
+[Rest] POST channels/425769735339114499/messages: 149.8 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Numenization: 0w0o0r0l0d
+[GarlicBot] Numenization: !getquote
+[Rest] POST channels/425769735339114499/messages: 82.06 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Numenization: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+[GarlicBot] Numenization: .//\/\/\\\/\/\\/\
+[GarlicBot] Drahlous: !addquote
+[GarlicBot] Numenization: !help
+[Rest] POST channels/425769735339114499/typing: 116.44 ms
+[Rest] POST channels/425769735339114499/messages: 131.66 ms
+[GarlicBot] GarlicBot: 
+[Gateway] Joined Tree World
+[GarlicBot] Numenization: !help
+[Rest] POST channels/425769735339114499/typing: 167.92 ms
+[Rest] POST channels/425769735339114499/messages: 184.89 ms
+[GarlicBot] GarlicBot: 
+[GarlicBot] Numenization: !help
+[Rest] POST channels/203612077011501056/messages: 93.57 ms
+[GarlicBot] GarlicBot: 
+[Rest] POST channels/203612077011501056/typing: 100.57 ms
+[GarlicBot] Drahlous: ?shutdown
+[GarlicBot] DrahlousBot: 👋
+[GarlicBot] Numenization: https://i.imgur.com/zFW78zN.png
+[GarlicBot] Drahlous: https://youtu.be/WNQ_c2IT9Po
+[GarlicBot] Drahlous: ?play A
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?play https://www.youtube.com/watch?v=MA7vdBgtspo
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `ALI-A vs CHEATERS in Fortnite: Battle Royale! (WHO WINS...?)` added by `Drahlous`
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?play https://www.youtube.com/watch?v=MA7vdBgtspo
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?skip
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?play https://www.youtube.com/watch?v=MA7vdBgtspo
+[GarlicBot] Drahlous: ?play https://www.youtube.com/watch?v=MA7vdBgtspo
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `ALI-A vs CHEATERS in Fortnite: Battle Royale! (WHO WINS...?)` added by `Drahlous`
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?skip
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Numenization: ?skip
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `ALI-A vs CHEATERS in Fortnite: Battle Royale! (WHO WINS...?)` added by `Drahlous`
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `Kid Cudi - Cleveland Is The Reason` added by `Drahlous`
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `Kid Cudi - Cleveland Is The Reason` added by `Drahlous`
+[GarlicBot] Drahlous: ?volume 100
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?shutdown
+[GarlicBot] Drahlous: ?restart
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `Kid Cudi - Cleveland Is The Reason` added by `Drahlous`
+[GarlicBot] Drahlous: ?volume 100
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?play https://www.youtube.com/watch?v=7IkvAb6THQY
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?skip
+[GarlicBot] DrahlousBot: 
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `Kid Cudi - Cleveland Is The Reason` added by `Drahlous`
+[GarlicBot] Drahlous: ?skip
+[GarlicBot] DrahlousBot: 
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `Far Away (with lyrics) - Red Dead Redemption Soundtrack` added by `Drahlous`
+[GarlicBot] Drahlous: ?volume 50
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Numenization: 97846565
+[GarlicBot] Drahlous: ?skip
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?play https://www.youtube.com/watch?v=7IkvAb6THQY
+[GarlicBot] DrahlousBot: 
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `Far Away (with lyrics) - Red Dead Redemption Soundtrack` added by `Drahlous`
+[GarlicBot] Drahlous: ?play https://www.youtube.com/watch?v=rY-FJvRqK0E
+[GarlicBot] Numenization: ?play https://www.youtube.com/watch?v=Q27UzUZuMMk
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?skip
+[GarlicBot] DrahlousBot: 
+[GarlicBot] DrahlousBot: 
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `Kero Kero Bonito - Flamingo` added by `Drahlous`
+[GarlicBot] Drahlous: ?volume 100
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?volume 50
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?skip
+[GarlicBot] DrahlousBot: 
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `SpongeBob Trap Remix [Distorted] [Ear Rape] [Bass Boosted]` added by `Numenization`
+[GarlicBot] Drahlous: ?volume 100
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?volume 50
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?skip
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?play https://www.youtube.com/watch?v=89F5fpvwPr0
+[GarlicBot] DrahlousBot: 
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `Death Grips - Takyon (Death Yon)` added by `Drahlous`
+[GarlicBot] Drahlous: ?skip
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?play https://www.youtube.com/watch?v=gQ5gtInauiI
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?volume 100
+[GarlicBot] DrahlousBot: 
+[GarlicBot] DrahlousBot: Now playing in `The Lounge`: `Carpenter Brut - You're mine (from Furi original soundtrack)` added by `Drahlous`
+[GarlicBot] Drahlous: ?volume 50
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Drahlous: ?skip
+[GarlicBot] DrahlousBot: 
+[GarlicBot] Numenization: https://www.twitch.tv/bucklington
+[GarlicBot] Drahlous: http://www.leehadwin.com/showroom/
+[GarlicBot] Drahlous: http://www.leehadwin.com/showroom/star
+[GarlicBot] Drahlous: http://www.leehadwin.com/showroom/the-game
+[GarlicBot] Numenization: https://www.youtube.com/watch?v=UWcBMFI4FaQ

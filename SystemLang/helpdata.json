@@ -1,0 +1,41 @@
+﻿[
+  {
+    "commandName": "`echo`",
+    "lines": [
+      "- Echoes back everything typed after the command"
+    ]
+  },
+  {
+    "commandName": "`help`",
+    "lines": [
+      "- Shows this message"
+    ]
+  },
+  {
+    "commandName": "`roll`",
+    "lines": [
+      "- Rolls an 'n' sided die.",
+      "- Usage: `!roll n`",
+      "- Defaults to 6 sides if no number is given"
+    ]
+  },
+  {
+    "commandName": "`quote`",
+    "lines": [
+      "- Gets the last message typed in the channel and adds it to quote database"
+    ]
+  },
+  {
+    "commandName": "`addquote`",
+    "lines": [
+      "- Manually enter a quote to add to the database",
+      "- Usage: `!addquote author quote_content`"
+    ]
+  },
+  {
+    "commandName": "`getquote`",
+    "lines": [
+      "- Gets a random quote from the database and displays it"
+    ]
+  }
+]
