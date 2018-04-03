@@ -16,7 +16,6 @@ namespace GarlicBot.Modules.Quotes
             {
                 return;
             }
-            IDisposable dispose = Context.Channel.EnterTypingState();
             string remainder = "";
             for(int i = 1; i < args.Length; i++)
             {
@@ -36,7 +35,6 @@ namespace GarlicBot.Modules.Quotes
             embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
             embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
             await Context.Channel.SendMessageAsync("", false, embed.Build());
-            dispose.Dispose();
         }
 
         [Command("quote")]
