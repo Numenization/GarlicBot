@@ -52,8 +52,7 @@ namespace GarlicBot
                 }
                 else if (input.ToLower() == "exit" || input.ToLower() == "close")
                 {
-                    Console.WriteLine("[Console] Closing GarlicBot...");
-                    Environment.Exit(0);
+                    Shutdown();
                 }
                 else if (input.ToLower() == "help")
                 {
@@ -89,6 +88,11 @@ namespace GarlicBot
             await Client.LogoutAsync();
             await Utilities.Log("Restarting...", LogSeverity.Info);
             program.StartAsync().GetAwaiter().GetResult();
+        }
+
+        public static void Shutdown() {
+            Console.WriteLine("[Console] Closing GarlicBot...");
+            Environment.Exit(0);
         }
 
         // TODO: Bot does not log out when application is closed

@@ -9,8 +9,10 @@
   "quoteAdded": "Added quote",
   "quoteAddedBody": "Added quote with author {0}",
   "quoteTitle": "Quote:",
-  "restartMessage": "Restarting...",
+  "restartMessage": "Restarting {0}...",
   "rollCommandCouldntParse": "Couldn't parse argument, default to 6 sides\n",
   "rollOutput": "Roll the Dice ({0} sides)",
-  "rollResult": "{0}Result: `{1}`"
+  "rollResult": "{0}Result: `{1}`",
+  "invalidPerms": "You do not have the required permissions for that command",
+  "shutdownMessage": "Shutting down {0}..."
 }

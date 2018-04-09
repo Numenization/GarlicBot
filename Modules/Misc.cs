@@ -22,7 +22,6 @@ namespace GarlicBot.Modules
             embed.WithDescription(message);
             embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
             embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-            embed.WithCurrentTimestamp();
             await Context.Channel.SendMessageAsync("", false, embed.Build());
         }
 
@@ -83,6 +82,46 @@ namespace GarlicBot.Modules
             embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
             embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
             await Context.Channel.SendMessageAsync("", false, embed.Build());
+        }
+
+        [Command("restart")]
+        public async Task Restart() {
+            if((Context.User as IGuildUser).GuildPermissions.Administrator) {
+                var embed = new EmbedBuilder();
+                embed.WithDescription(String.Format(await Utilities.GetAlert("restartMessage"), Config.bot.botName));
+                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
+                await Context.Channel.SendMessageAsync("", false, embed.Build());
+                Program.Restart();
+            }
+            else {
+                var embed = new EmbedBuilder();
+                embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
+                embed.WithDescription(await Utilities.GetAlert("invalidPerms"));
+                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
+                await Context.Channel.SendMessageAsync("", false, embed.Build());
+            }
+        }
+
+        [Command("shutdown")]
+        public async Task Shutdown() {
+            if ((Context.User as IGuildUser).GuildPermissions.Administrator) {
+                var embed = new EmbedBuilder();
+                embed.WithDescription(String.Format(await Utilities.GetAlert("shutdownMessage"), Config.bot.botName));
+                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
+                await Context.Channel.SendMessageAsync("", false, embed.Build());
+                Program.Shutdown();
+            }
+            else {
+                var embed = new EmbedBuilder();
+                embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
+                embed.WithDescription(await Utilities.GetAlert("invalidPerms"));
+                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
+                await Context.Channel.SendMessageAsync("", false, embed.Build());
+            }
         }
     }
 }
