@@ -7,23 +7,32 @@ using Discord.Commands;
 namespace GarlicBot.Modules.ImageProcessing
 {
     public class ImageCommands : ModuleBase<SocketCommandContext> {
-        [Command("read")]
+        [Command("read", RunMode = RunMode.Async)]
         public async Task readImage() {
             var attachments = Context.Message.Attachments.GetEnumerator();
             if(attachments.MoveNext()) {
                 string url = attachments.Current.Url;
                 ImageReader reader = new ImageReader();
-                await reader.ReadFromUrl(url);
-                while(!reader.Ready) {
-                    await Task.Delay(1);
+                var progress = new Progress<string>();
+                progress.ProgressChanged += (s, e) => {
+                    Console.WriteLine(e);
+                };
+                if (await reader.ReadFromUrl(url, progress)) {
+                    //do stuff with image
                 }
             }
         }
 
-        [Command("read")]
+        [Command("read", RunMode = RunMode.Async)]
         public async Task readImageUrl([Remainder]string url) {
             ImageReader reader = new ImageReader();
-            await reader.ReadFromUrl(url);
+            var progress = new Progress<string>();
+            progress.ProgressChanged += (s, e) => {
+                Console.WriteLine(e);
+            };
+            if (await reader.ReadFromUrl(url, progress)) {
+                // do stuff with image
+            }
         }
     }
 }

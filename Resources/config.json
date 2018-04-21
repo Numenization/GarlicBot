@@ -1,8 +1,9 @@
 {
-  "authKey": "",
+  "authKey": "MjAzNjcyMjcyNDY3MjYzNDg4.Db0LnA.DgyfcAjeALY653mc8SqtMugTSJw",
   "botIconURL": "https://i.imgur.com/NFS0WeC.jpg",
   "botName": "GarlicBot",
   "commandPrefix": "!",
   "embedColor": "140,60,60",
-  "logLevel": 4
+  "logLevel": 4,
+  "maxFileSize": "5000"
 }

@@ -31,9 +31,10 @@ namespace GarlicBot
                     var result = await _service.ExecuteAsync(context, argPos);
                     if(!result.IsSuccess)
                     {
+                        await Utilities.Log(result.ErrorReason, LogSeverity.Warning);
                         var embed = new EmbedBuilder();
                         embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                        embed.WithDescription(await Utilities.GetAlert("commandNotFound") + " " + result.ErrorReason);
+                        embed.WithDescription(result.ErrorReason);
                         embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
                         await context.Channel.SendMessageAsync("", false, embed.Build());
                     }

@@ -39,5 +39,6 @@ namespace GarlicBot
         public string botIconURL = "https://i.imgur.com/NFS0WeC.jpg";
         public LogSeverity logLevel = LogSeverity.Verbose;
         public string embedColor = "140,60,60";
+        public long maxFileSize = 5000;
     }
 }
