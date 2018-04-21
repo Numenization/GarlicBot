@@ -1,0 +1,17 @@
+[Discord] Discord.Net v2.0.0-beta (API v6)
+[Rest] GET voice/regions: 230.77 ms
+[Gateway] Connecting
+[Rest] GET gateway: 18.94 ms
+[Gateway] Connected
+[Gateway] Connected to Tree World
+[Gateway] Connected to Bot Testing
+[GarlicBot] Bot is connected and running. Type "help" to see available console commands.
+[Gateway] Ready
+[GarlicBot] Numenization: !read http://www.satsignal.eu/wxsat/msg-1-fc-40.jpg
+[GarlicBot] GarlicBot: 
+[GarlicBot] File size is 4158 KB. Opening download stream...
+[GarlicBot] Downloading 1794/4158 KB
+[GarlicBot] Downloading 2401/4158 KB
+[GarlicBot] Download complete (4158 KB). Opening file for modification...
+[GarlicBot] Image opened and ready for writing.
+[GarlicBot] Numenization: https://i.imgur.com/5HBjJgX.png

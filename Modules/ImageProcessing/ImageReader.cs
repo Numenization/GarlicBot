@@ -25,7 +25,6 @@ namespace GarlicBot.Modules.ImageProcessing
             }
             _ready = false;
 
-            progress.Report("Requesting file size...");
             Uri uri;
             if(Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out uri)) {
                 HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(uri);
@@ -39,7 +38,7 @@ namespace GarlicBot.Modules.ImageProcessing
                     stopwatch.Start();
 
                     client.DownloadProgressChanged += (s, e) => {
-                        if(stopwatch.ElapsedMilliseconds % 100 == 0)
+                        if(stopwatch.ElapsedMilliseconds % 250 == 0)
                             progress.Report($"Downloading {Math.Round((double)e.BytesReceived / kilobyteRatio)}/{Math.Round((double)fileSize / kilobyteRatio)} KB");
                     };
 
@@ -77,9 +76,9 @@ namespace GarlicBot.Modules.ImageProcessing
         }
 
         private Bitmap _bitmap;
-        public Bitmap Bitmap {
+        public ref Bitmap Bitmap {
             get {
-                return _bitmap;
+                return ref _bitmap;
             }
         }
     }

@@ -15,7 +15,7 @@ namespace GarlicBot.Modules.ImageProcessing
                 ImageReader reader = new ImageReader();
                 var progress = new Progress<string>();
                 progress.ProgressChanged += (s, e) => {
-                    Console.WriteLine(e);
+                    Utilities.Log(e, LogSeverity.Verbose);
                 };
                 if (await reader.ReadFromUrl(url, progress)) {
                     //do stuff with image
@@ -28,7 +28,7 @@ namespace GarlicBot.Modules.ImageProcessing
             ImageReader reader = new ImageReader();
             var progress = new Progress<string>();
             progress.ProgressChanged += (s, e) => {
-                Console.WriteLine(e);
+                Utilities.Log(e, LogSeverity.Verbose);
             };
             if (await reader.ReadFromUrl(url, progress)) {
                 // do stuff with image
