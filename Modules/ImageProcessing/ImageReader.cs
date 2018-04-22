@@ -40,7 +40,7 @@ namespace GarlicBot.Modules.ImageProcessing
                     long elapsedTimeSinceLastUpdate = 0;
 
                     client.DownloadProgressChanged += (s, e) => {
-                        if(stopwatch.ElapsedMilliseconds - elapsedTimeSinceLastUpdate >= 250) {
+                        if(stopwatch.ElapsedMilliseconds - elapsedTimeSinceLastUpdate >= Config.bot.progressUpdateDelay) {
                             elapsedTimeSinceLastUpdate = stopwatch.ElapsedMilliseconds;
                             progress.Report($"Downloading {Math.Round((double)e.BytesReceived / kilobyteRatio)}/{Math.Round((double)fileSize / kilobyteRatio)} KB");
                         }

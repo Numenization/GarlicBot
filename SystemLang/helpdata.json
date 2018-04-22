@@ -1,5 +1,17 @@
 ﻿[
   {
+    "commandName": "`restart`",
+    "lines": [
+      "- Restarts the bot (server admin only)"
+    ]
+  },
+  {
+    "commandName": "`shutdown`",
+    "lines": [
+      "- Shuts down the bot (server admin only)"
+    ]
+  },
+  {
     "commandName": "`echo`",
     "lines": [
       "- Echoes back everything typed after the command"
@@ -36,6 +48,14 @@
     "commandName": "`getquote`",
     "lines": [
       "- Gets a random quote from the database and displays it"
+    ]
+  },
+  {
+    "commandName": "`scramble`",
+    "lines": [
+      "- Scrambles an image",
+      "- Usage: `!scramble image_url`",
+      "- Alt Usage: `!scramble` with an attached image"
     ]
   }
 ]

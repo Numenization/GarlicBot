@@ -5,5 +5,6 @@
   "commandPrefix": "!",
   "embedColor": "140,60,60",
   "logLevel": 4,
-  "maxFileSize": "5000"
+  "maxFileSize": "5000",
+  "progressUpdateDelay": "500"
 }

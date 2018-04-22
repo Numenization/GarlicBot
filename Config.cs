@@ -40,5 +40,6 @@ namespace GarlicBot
         public LogSeverity logLevel = LogSeverity.Verbose;
         public string embedColor = "140,60,60";
         public long maxFileSize = 5000;
+        public long progressUpdateDelay = 500;
     }
 }

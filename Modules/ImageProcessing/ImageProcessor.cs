@@ -14,7 +14,7 @@ namespace GarlicBot.Modules.ImageProcessing
             _working = false;
             _progress = 0;
             _progressDecimals = 1;
-            _timeBetweenUpdates = 500;
+            _timeBetweenUpdates = Config.bot.progressUpdateDelay;
             _reader = reader;
         }
 
