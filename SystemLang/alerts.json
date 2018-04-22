@@ -14,5 +14,6 @@
   "rollOutput": "Roll the Dice ({0} sides)",
   "rollResult": "{0}Result: `{1}`",
   "invalidPerms": "You do not have the required permissions for that command",
-  "shutdownMessage": "Shutting down {0}..."
+  "shutdownMessage": "Shutting down {0}...",
+  "imageDownloadFailed": "Error in downloading image."
 }
