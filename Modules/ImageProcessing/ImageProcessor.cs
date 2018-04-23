@@ -41,7 +41,7 @@ namespace GarlicBot.Modules.ImageProcessing
                 for (int i = 0; i < bitmap.Width; i++) {
                     for (int j = 0; j < bitmap.Height / 2; j++) {
                         if (rand.Next() % 2 == 1) {
-                            Color temp = bitmap.GetPixel(i, j);
+                            var temp = bitmap.GetPixel(i, j);
                             bitmap.SetPixel(i, j, bitmap.GetPixel(i, (bitmap.Height - 1) - j));
                             bitmap.SetPixel(i, (bitmap.Height - 1) - j, temp);
                         }

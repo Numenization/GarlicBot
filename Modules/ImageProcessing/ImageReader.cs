@@ -4,8 +4,15 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Diagnostics;
 using System.Drawing;
-//using Discord;
 
+/*
+ * 
+ * This requires the GDIPlus library in order to work correctly
+ * You can install this using this command:
+ * sudo apt-get install libgdiplus
+ * 
+ */
+ 
 namespace GarlicBot.Modules.ImageProcessing
 {
     public class ImageReader
@@ -47,9 +54,22 @@ namespace GarlicBot.Modules.ImageProcessing
                     };
 
                     _fileName = $"{DateTime.Now.ToFileTime()}";
-                    await client.DownloadFileTaskAsync(uri, $"{folder}/{_fileName}{extension}");
+                    //await client.DownloadFileTaskAsync(uri, $"{folder}/{_fileName}{extension}");
+                    byte[] data = await client.DownloadDataTaskAsync(uri);
+                    MemoryStream ms;
+                    try {
+                        ms = new MemoryStream(data);
+                        _bitmap = new Bitmap(ms);
+                        _bitmap.Save($"{folder}/{_fileName}{extension}");
+                    }
+                    catch(Exception e) {
+                        string errorMsg = "File either does not exist or is not an image";
+                        progress.Report(errorMsg);
+                        error.ErrorReason = errorMsg;
+                        return false;
+                    }
                     stopwatch.Stop();
-                    _bitmap = (Bitmap)System.Drawing.Image.FromFile($"{folder}/{_fileName}{extension}");
+                    //_bitmap = (Bitmap)Image.FromFile($"{folder}/{_fileName}{extension}"); // doesn't seem to work on linux
                     progress.Report($"Download complete ({Math.Round((double)fileSize / kilobyteRatio)} KB).");
                 }
                 else {
