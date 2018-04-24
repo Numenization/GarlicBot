@@ -27,7 +27,7 @@ namespace GarlicBot.Modules.ImageProcessing
                     };
                     ImageProcessor processor = new ImageProcessor(reader);
                     string file = await processor.Scramble(processProgress);
-                    await Utilities.Log("Sending file...", LogSeverity.Info);
+                    await Utilities.LogAsync("Sending file...", LogSeverity.Info);
                     await Context.Channel.SendFileAsync(file);
                 }
                 else {
@@ -57,7 +57,7 @@ namespace GarlicBot.Modules.ImageProcessing
                 };
                 ImageProcessor processor = new ImageProcessor(reader);
                 string file = await processor.Scramble(processProgress);
-                await Utilities.Log("Sending file...", LogSeverity.Info);
+                await Utilities.LogAsync("Sending file...", LogSeverity.Info);
                 await Context.Channel.SendFileAsync(file);
             }
             else {

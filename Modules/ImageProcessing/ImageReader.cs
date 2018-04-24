@@ -66,7 +66,7 @@ namespace GarlicBot.Modules.ImageProcessing
                         progress.Report($"Image reading complete. ({(double)stopwatch.ElapsedMilliseconds / 1000} s)");
                     }
                     catch(Exception e) {
-                        string errorMsg = "File either does not exist or is not an image";
+                        string errorMsg = $"{e.HResult} ({e.Message})";
                         progress.Report(errorMsg);
                         error.ErrorReason = errorMsg;
                         return false;

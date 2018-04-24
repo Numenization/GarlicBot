@@ -29,7 +29,7 @@ namespace GarlicBot.Modules.ImageProcessing
         public async Task<string> Scramble(IProgress<double> progress) {
             if(_reader.Bitmap != null && _reader.Ready) {
                 //do stuff with image
-                await Utilities.Log("Processing image...", Discord.LogSeverity.Info);
+                await Utilities.LogAsync("Processing image...", Discord.LogSeverity.Info);
                 Bitmap bitmap = _reader.Bitmap;
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
@@ -56,7 +56,7 @@ namespace GarlicBot.Modules.ImageProcessing
                 string newFileName = $"Resources/Images/{_reader.FileName}_Scrambled.jpg";
                 bitmap.Save(newFileName, ImageFormat.Jpeg);
                 stopwatch.Stop();
-                await Utilities.Log($"Processing image complete. ({(double)stopwatch.ElapsedMilliseconds / 1000} s)", Discord.LogSeverity.Verbose);
+                await Utilities.LogAsync($"Processing image complete. ({(double)stopwatch.ElapsedMilliseconds / 1000} s)", Discord.LogSeverity.Verbose);
                 return newFileName;
             }
             else {

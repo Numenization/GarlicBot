@@ -8,25 +8,20 @@ using GarlicBot.Modules.ImageProcessing;
 
 namespace GarlicBot
 {
-    public class Program
-    {
-        static void Main(string[] args) 
+    public class Program {
+        static void Main(string[] args)
         => (program = new Program()).StartAsync().GetAwaiter().GetResult();
 
 
-        public async Task StartAsync()
-        {
-            if (!Directory.Exists("Resources"))
-            {
-                await Utilities.Log(await Utilities.GetAlert("firstTimeRunning"), LogSeverity.Error);
+        public async Task StartAsync() {
+            if (!Directory.Exists("Resources")) {
+                await Utilities.LogAsync(await Utilities.GetAlert("firstTimeRunning"), LogSeverity.Error);
             }
-            if(Config.bot.authKey == "" || Config.bot.authKey == null)
-            {
-                await Utilities.Log(await Utilities.GetAlert("missingAuthKey"), LogSeverity.Error);
+            if (Config.bot.authKey == "" || Config.bot.authKey == null) {
+                await Utilities.LogAsync(await Utilities.GetAlert("missingAuthKey"), LogSeverity.Error);
                 await Task.Delay(-1);
             }
-            _client = new DiscordSocketClient(new DiscordSocketConfig
-            {
+            _client = new DiscordSocketClient(new DiscordSocketConfig {
                 LogLevel = Config.bot.logLevel
             });
             _client.Log += Log;
@@ -37,42 +32,35 @@ namespace GarlicBot
 
             _handler = new CommandHandler(_client);
 
-            _client.Ready += async ()=> {
+            _client.Ready += async () => {
                 // Bot is ready, initialize console command input
-                await Utilities.Log("Bot is connected and running. Type \"help\" to see available console commands.", LogSeverity.Info);
+                await Utilities.LogAsync("Bot is connected and running. Type \"help\" to see available console commands.", LogSeverity.Info);
             };
 
             ImageReader image = new ImageReader(); // need this dont ask
 
             bool running = true;
-            while (running)
-            {
+            while (running) {
                 string input = Console.ReadLine();
-                if (input.ToLower() == "restart")
-                {
-                    await Restart();
+                if (input.ToLower() == "restart") {
+                    await RestartAsync();
                     running = false;
                 }
-                else if (input.ToLower() == "exit" || input.ToLower() == "close")
-                {
+                else if (input.ToLower() == "exit" || input.ToLower() == "close") {
                     Shutdown();
                 }
-                else if (input.ToLower() == "help")
-                {
+                else if (input.ToLower() == "help") {
                     Console.WriteLine("[Console] GarlicBot Console Commands:");
                     Console.WriteLine(" - restart : Refreshes the bot");
                     Console.WriteLine(" - exit    : Safely logs out and closes the application");
                     Console.WriteLine(" - help    : Shows this text");
                 }
-                else if (input.ToLower() == "showquotes")
-                {
-                    foreach(Quote q in QuoteManager.quotes)
-                    {
+                else if (input.ToLower() == "showquotes") {
+                    foreach (Quote q in QuoteManager.quotes) {
                         Console.WriteLine($"Author: {q.author}\nText: {q.text}\nDate:{q.date}");
                     }
                 }
-                else
-                {
+                else {
                     Console.WriteLine($"[Console] Invalid command \"{input}\"");
                 }
             }
@@ -80,16 +68,20 @@ namespace GarlicBot
             await Task.Delay(-1);
         }
 
-        private async Task Log(LogMessage msg)
-        {
+        private async Task Log(LogMessage msg) {
             Console.WriteLine($"[{msg.Source}] {msg.Message}");
-            await Utilities.WriteToLogFile(msg);
+            await Utilities.WriteToLogFileAsync(msg);
         }
 
-        public static async Task Restart()
-        {
+        public static async Task RestartAsync() {
             await Client.LogoutAsync();
-            await Utilities.Log("Restarting...", LogSeverity.Info);
+            await Utilities.LogAsync("Restarting...", LogSeverity.Info);
+            program.StartAsync().GetAwaiter().GetResult();
+        }
+
+        public static void Restart() {
+            Client.LogoutAsync();
+            Utilities.Log("Restarting...", LogSeverity.Info);
             program.StartAsync().GetAwaiter().GetResult();
         }
 

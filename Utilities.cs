@@ -19,7 +19,7 @@ namespace GarlicBot
             }
             catch(FileNotFoundException e)
             {
-                Log("SystemLang folder not found!", LogSeverity.Error);
+                Log($"{e.HResult} SystemLang/alerts.json", LogSeverity.Error);
             }
         }
 
@@ -31,17 +31,24 @@ namespace GarlicBot
             }
             else
             {
-                await Log($"Could not find alert \"{key}\" in json!", LogSeverity.Error);
+                await LogAsync($"Could not find alert \"{key}\" in json!", LogSeverity.Error);
                 return "";
             }
         }
 
-        public static async Task Log(string msg, LogSeverity level)
+        public static void Log(string msg, LogSeverity level) {
+            if (level <= Config.bot.logLevel) {
+                Console.WriteLine($"[GarlicBot] {msg}");
+                WriteToLogFile(msg, "GarlicBot");
+            }
+        }
+
+        public static async Task LogAsync(string msg, LogSeverity level)
         {
             if(level <= Config.bot.logLevel)
             {
                 Console.WriteLine($"[GarlicBot] {msg}");
-                await WriteToLogFile(msg, "GarlicBot");
+                await WriteToLogFileAsync(msg, "GarlicBot");
             }
         }
 
@@ -63,7 +70,7 @@ namespace GarlicBot
                 }
                 catch(Exception e)
                 {
-                    await Log($"Error trying to parse color!\n{e.Message}", LogSeverity.Error);
+                    await LogAsync($"Error trying to parse color!\n{e.Message}", LogSeverity.Error);
                     return new Color(255,255,255);
                 }
 
@@ -72,7 +79,7 @@ namespace GarlicBot
             return new Color(255, 255, 255);
         }
 
-        public static async Task WriteToLogFile(string msg)
+        public static async Task WriteToLogFileAsync(string msg)
         {
             if(logFile == null)
             {
@@ -86,7 +93,7 @@ namespace GarlicBot
             await logFile.WriteLineAsync($"[GarlicBot] {msg}");
         }
 
-        public static void WriteToLogFileSync(string msg)
+        public static void WriteToLogFile(string msg)
         {
             if (logFile == null)
             {
@@ -100,7 +107,18 @@ namespace GarlicBot
             logFile.WriteLine($"[GarlicBot] {msg}");
         }
 
-        public static async Task WriteToLogFile(string msg, string source)
+        public static void WriteToLogFile(string msg, string source) {
+            if (logFile == null) {
+                if (!Directory.Exists("Logs")) {
+                    Directory.CreateDirectory("Logs");
+                }
+                logFile = new StreamWriter($"Logs/{DateTime.UtcNow.ToFileTime()}_Log.txt", true);
+                logFile.AutoFlush = true;
+            }
+            logFile.WriteLine($"[{source}] {msg}");
+        }
+
+        public static async Task WriteToLogFileAsync(string msg, string source)
         {
             if (logFile == null)
             {
@@ -114,7 +132,7 @@ namespace GarlicBot
             await logFile.WriteLineAsync($"[{source}] {msg}");
         }
 
-        public static async Task WriteToLogFile(LogMessage logMessage)
+        public static async Task WriteToLogFileAsync(LogMessage logMessage)
         {
             if (logFile == null)
             {

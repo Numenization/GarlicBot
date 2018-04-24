@@ -18,7 +18,7 @@ namespace GarlicBot.Modules
             }
             catch(Exception e)
             {
-                Utilities.Log("FATAL: SystemLang/helpdata.json is missing! You may need to reinstall GarlicBot", LogSeverity.Critical);
+                Utilities.Log($"{e.HResult} {helpFilePath}", LogSeverity.Critical);
             }
         }
 

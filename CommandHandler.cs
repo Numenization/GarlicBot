@@ -23,7 +23,7 @@ namespace GarlicBot
             if(msg != null)
             {
                 SocketCommandContext context = new SocketCommandContext(_client, msg);
-                await Utilities.Log($"{context.User.Username}: {context.Message.Content}", LogSeverity.Verbose);
+                await Utilities.LogAsync($"{context.User.Username}: {context.Message.Content}", LogSeverity.Verbose);
                 int argPos = 0;
                 if (msg.HasStringPrefix(Config.bot.commandPrefix, ref argPos)
                     || msg.HasMentionPrefix(_client.CurrentUser, ref argPos))
@@ -31,7 +31,7 @@ namespace GarlicBot
                     var result = await _service.ExecuteAsync(context, argPos);
                     if(!result.IsSuccess)
                     {
-                        await Utilities.Log(result.ErrorReason, LogSeverity.Warning);
+                        await Utilities.LogAsync(result.ErrorReason, LogSeverity.Warning);
                         var embed = new EmbedBuilder();
                         embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
                         embed.WithDescription(result.ErrorReason);

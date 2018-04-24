@@ -44,7 +44,7 @@ namespace GarlicBot.Modules
             {
                 sides = int.Parse(message);
             }
-            catch (Exception e)
+            catch
             {
                 pre = await Utilities.GetAlert("rollCommandCouldntParse");
             }
