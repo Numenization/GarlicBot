@@ -56,11 +56,14 @@ namespace GarlicBot.Modules.ImageProcessing
                     _fileName = $"{DateTime.Now.ToFileTime()}";
                     //await client.DownloadFileTaskAsync(uri, $"{folder}/{_fileName}{extension}");
                     byte[] data = await client.DownloadDataTaskAsync(uri);
+                    progress.Report($"Download complete ({Math.Round((double)fileSize / kilobyteRatio)} KB).");
                     MemoryStream ms;
                     try {
+                        progress.Report($"Reading image data...");
                         ms = new MemoryStream(data);
                         _bitmap = new Bitmap(ms);
                         _bitmap.Save($"{folder}/{_fileName}{extension}");
+                        progress.Report($"Image reading complete. ({(double)stopwatch.ElapsedMilliseconds / 1000} s)");
                     }
                     catch(Exception e) {
                         string errorMsg = "File either does not exist or is not an image";
@@ -70,7 +73,6 @@ namespace GarlicBot.Modules.ImageProcessing
                     }
                     stopwatch.Stop();
                     //_bitmap = (Bitmap)Image.FromFile($"{folder}/{_fileName}{extension}"); // doesn't seem to work on linux
-                    progress.Report($"Download complete ({Math.Round((double)fileSize / kilobyteRatio)} KB).");
                 }
                 else {
                     string errorMsg = $"File is too big! ({Math.Round((double)fileSize / kilobyteRatio)}/{Config.bot.maxFileSize} KB)";

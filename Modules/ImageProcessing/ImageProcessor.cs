@@ -56,7 +56,7 @@ namespace GarlicBot.Modules.ImageProcessing
                 string newFileName = $"Resources/Images/{_reader.FileName}_Scrambled.jpg";
                 bitmap.Save(newFileName, ImageFormat.Jpeg);
                 stopwatch.Stop();
-                await Utilities.Log($"Done ({(double)stopwatch.ElapsedMilliseconds / 1000} s)", Discord.LogSeverity.Verbose);
+                await Utilities.Log($"Processing image complete. ({(double)stopwatch.ElapsedMilliseconds / 1000} s)", Discord.LogSeverity.Verbose);
                 return newFileName;
             }
             else {
