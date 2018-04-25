@@ -8,8 +8,14 @@ using System.Diagnostics;
 
 namespace GarlicBot.Modules.ImageProcessing
 {
+    /// <summary>
+    /// Class containing methods for altering images
+    /// </summary>
     public class ImageProcessor
     {
+        /// <summary>
+        /// Class containing methods for altering images
+        /// </summary>
         public ImageProcessor(ImageReader reader) {
             _working = false;
             _progress = 0;
@@ -26,9 +32,15 @@ namespace GarlicBot.Modules.ImageProcessing
             _reader = reader;
         }
 
+        /// <summary>
+        /// Randomly flips pixels along the X-Axis {O(n/2)}
+        /// </summary>
+        /// <param name="progress">Keeps track of the processing progress</param>
+        /// <returns></returns>
         public async Task<string> Scramble(IProgress<double> progress) {
-            if(_reader.Bitmap != null && _reader.Ready) {
+            if(_reader.Bitmap != null && _reader.Ready && !_working) {
                 //do stuff with image
+                _working = true;
                 await Utilities.LogAsync("Processing image...", Discord.LogSeverity.Info);
                 Bitmap bitmap = _reader.Bitmap;
                 Stopwatch stopwatch = new Stopwatch();
@@ -57,6 +69,7 @@ namespace GarlicBot.Modules.ImageProcessing
                 bitmap.Save(newFileName, ImageFormat.Jpeg);
                 stopwatch.Stop();
                 await Utilities.LogAsync($"Processing image complete. ({(double)stopwatch.ElapsedMilliseconds / 1000} s)", Discord.LogSeverity.Verbose);
+                _working = false;
                 return newFileName;
             }
             else {
@@ -70,16 +83,25 @@ namespace GarlicBot.Modules.ImageProcessing
         private long _timeBetweenUpdates;
         private int _progressDecimals;
 
+        /// <summary>
+        /// Status representing whether the processor is working or not
+        /// </summary>
         public bool Working {
             get {
                 return _working;
             }
         }
+        /// <summary>
+        /// Gets the current processing progress
+        /// </summary>
         public double Progress {
             get {
                 return _progress;
             }
         }
+        /// <summary>
+        /// The time between updates
+        /// </summary>
         public long UpdateTick {
             set {
                 _timeBetweenUpdates = value;
@@ -88,6 +110,9 @@ namespace GarlicBot.Modules.ImageProcessing
                 return _timeBetweenUpdates;
             }
         }
+        /// <summary>
+        /// The number of decimal places for the progress reports
+        /// </summary>
         public int ProgressDecimals {
             set {
                 _progressDecimals = value;

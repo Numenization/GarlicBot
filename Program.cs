@@ -19,7 +19,8 @@ namespace GarlicBot
             }
             if (Config.bot.authKey == "" || Config.bot.authKey == null) {
                 await Utilities.LogAsync(await Utilities.GetAlert("missingAuthKey"), LogSeverity.Error);
-                await Task.Delay(-1);
+                Console.ReadKey();
+                Environment.Exit(0);
             }
             _client = new DiscordSocketClient(new DiscordSocketConfig {
                 LogLevel = Config.bot.logLevel
@@ -73,18 +74,28 @@ namespace GarlicBot
             await Utilities.WriteToLogFileAsync(msg);
         }
 
+        /// <summary>
+        /// Restarts the program
+        /// </summary>
+        /// <returns></returns>
         public static async Task RestartAsync() {
             await Client.LogoutAsync();
             await Utilities.LogAsync("Restarting...", LogSeverity.Info);
             program.StartAsync().GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Restarts the program
+        /// </summary>
         public static void Restart() {
             Client.LogoutAsync();
             Utilities.Log("Restarting...", LogSeverity.Info);
             program.StartAsync().GetAwaiter().GetResult();
         }
 
+        /// <summary>
+        /// Ends the program
+        /// </summary>
         public static void Shutdown() {
             Console.WriteLine("[Console] Closing GarlicBot...");
             Environment.Exit(0);

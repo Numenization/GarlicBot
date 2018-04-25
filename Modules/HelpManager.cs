@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 
 namespace GarlicBot.Modules
 {
+    /// <summary>
+    /// Class used to help manage information for Help commands
+    /// </summary>
     class HelpManager
     {
         static HelpManager()
@@ -22,6 +25,10 @@ namespace GarlicBot.Modules
             }
         }
 
+        /// <summary>
+        /// Gets an embed with information about all the available commands
+        /// </summary>
+        /// <returns>The embed with help information</returns>
         public static async Task<Embed> BuildEmbed()
         {
             var embed = new EmbedBuilder();

@@ -15,8 +15,14 @@ using System.Drawing;
  
 namespace GarlicBot.Modules.ImageProcessing
 {
+    /// <summary>
+    /// Downloads images from URLs to be used for image processing
+    /// </summary>
     public class ImageReader
     {
+        /// <summary>
+        /// Downloads images from URLs to be used for image processing
+        /// </summary>
         public ImageReader() {
             _bitmap = null;
             _ready = true;
@@ -25,6 +31,13 @@ namespace GarlicBot.Modules.ImageProcessing
             }
         }
 
+        /// <summary>
+        /// Downloads an image from a given URL
+        /// </summary>
+        /// <param name="url">An absolute URL pointing to an image</param>
+        /// <param name="progress">Keeps track of the download progress</param>
+        /// <param name="error">If the task returns false, error information will be passed here</param>
+        /// <returns></returns>
         public async Task<bool> ReadFromUrl(string url, IProgress<string> progress, ImageReadError error) {
             if(!_ready) {
                 string errorMsg = "Already working on operation";
@@ -54,7 +67,6 @@ namespace GarlicBot.Modules.ImageProcessing
                     };
 
                     _fileName = $"{DateTime.Now.ToFileTime()}";
-                    //await client.DownloadFileTaskAsync(uri, $"{folder}/{_fileName}{extension}");
                     byte[] data = await client.DownloadDataTaskAsync(uri);
                     progress.Report($"Download complete ({Math.Round((double)fileSize / kilobyteRatio)} KB).");
                     MemoryStream ms;
@@ -72,7 +84,6 @@ namespace GarlicBot.Modules.ImageProcessing
                         return false;
                     }
                     stopwatch.Stop();
-                    //_bitmap = (Bitmap)Image.FromFile($"{folder}/{_fileName}{extension}"); // doesn't seem to work on linux
                 }
                 else {
                     string errorMsg = $"File is too big! ({Math.Round((double)fileSize / kilobyteRatio)}/{Config.bot.maxFileSize} KB)";
@@ -98,6 +109,9 @@ namespace GarlicBot.Modules.ImageProcessing
         private const long kilobyteRatio = 1024;
 
         private bool _ready;
+        /// <summary>
+        /// Status representing whether the reader is ready to download another file
+        /// </summary>
         public bool Ready {
             get {
                 return _ready;
@@ -105,6 +119,9 @@ namespace GarlicBot.Modules.ImageProcessing
         }
 
         private string _fileName;
+        /// <summary>
+        /// The filename of the currently stored bitmap
+        /// </summary>
         public string FileName {
             get {
                 return _fileName;
@@ -112,6 +129,9 @@ namespace GarlicBot.Modules.ImageProcessing
         }
 
         private Bitmap _bitmap;
+        /// <summary>
+        /// The currently stored bitmap in the image reader
+        /// </summary>
         public ref Bitmap Bitmap {
             get {
                 return ref _bitmap;
@@ -129,6 +149,9 @@ namespace GarlicBot.Modules.ImageProcessing
         }
 
         private string _reason;
+        /// <summary>
+        /// The error returned by an ImageReader
+        /// </summary>
         public string ErrorReason {
             set {
                 _reason = value;

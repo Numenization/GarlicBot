@@ -23,6 +23,11 @@ namespace GarlicBot
             }
         }
 
+        /// <summary>
+        /// Method that gets an alert from alerts.json given a key
+        /// </summary>
+        /// <param name="key">Key to get alert for</param>
+        /// <returns></returns>
         public static async Task<string> GetAlert(string key)
         {
             if(_alerts.ContainsKey(key))
@@ -36,6 +41,11 @@ namespace GarlicBot
             }
         }
 
+        /// <summary>
+        /// Synchronously log a message to the console
+        /// </summary>
+        /// <param name="msg">Message to log</param>
+        /// <param name="level">Logging level</param>
         public static void Log(string msg, LogSeverity level) {
             if (level <= Config.bot.logLevel) {
                 Console.WriteLine($"[GarlicBot] {msg}");
@@ -43,6 +53,12 @@ namespace GarlicBot
             }
         }
 
+        /// <summary>
+        /// Asynchronously log a message to the console
+        /// </summary>
+        /// <param name="msg">Message to log</param>
+        /// <param name="level">Logging level</param>
+        /// <returns></returns>
         public static async Task LogAsync(string msg, LogSeverity level)
         {
             if(level <= Config.bot.logLevel)
@@ -52,6 +68,11 @@ namespace GarlicBot
             }
         }
 
+        /// <summary>
+        /// Parses a color from a string in the form of "R,G,B"
+        /// </summary>
+        /// <param name="rgb"></param>
+        /// <returns>The color represented by the string, if it exists</returns>
         public static async Task<Color> ParseColor(string rgb)
         {
             int r, g, b;
@@ -79,6 +100,11 @@ namespace GarlicBot
             return new Color(255, 255, 255);
         }
 
+        /// <summary>
+        /// Asynchronously write a string to the log file
+        /// </summary>
+        /// <param name="msg">Message to log</param>
+        /// <returns></returns>
         public static async Task WriteToLogFileAsync(string msg)
         {
             if(logFile == null)
@@ -93,6 +119,10 @@ namespace GarlicBot
             await logFile.WriteLineAsync($"[GarlicBot] {msg}");
         }
 
+        /// <summary>
+        /// Synchronously write a string to the log file
+        /// </summary>
+        /// <param name="msg">Message to write</param>
         public static void WriteToLogFile(string msg)
         {
             if (logFile == null)
@@ -107,6 +137,11 @@ namespace GarlicBot
             logFile.WriteLine($"[GarlicBot] {msg}");
         }
 
+        /// <summary>
+        /// Synchronously write a string to the log file
+        /// </summary>
+        /// <param name="msg">Message to write</param>
+        /// <param name="source">Source of call</param>
         public static void WriteToLogFile(string msg, string source) {
             if (logFile == null) {
                 if (!Directory.Exists("Logs")) {
@@ -118,6 +153,11 @@ namespace GarlicBot
             logFile.WriteLine($"[{source}] {msg}");
         }
 
+        /// <summary>
+        /// Asynchronously write a string to the log file
+        /// </summary>
+        /// <param name="msg">Message to write</param>
+        /// <param name="source">Source of call</param>
         public static async Task WriteToLogFileAsync(string msg, string source)
         {
             if (logFile == null)
@@ -132,6 +172,11 @@ namespace GarlicBot
             await logFile.WriteLineAsync($"[{source}] {msg}");
         }
 
+        /// <summary>
+        /// Asynchronously write a string to the log file
+        /// </summary>
+        /// <param name="logMessage">Object containing message to write and source information</param>
+        /// <returns></returns>
         public static async Task WriteToLogFileAsync(LogMessage logMessage)
         {
             if (logFile == null)
