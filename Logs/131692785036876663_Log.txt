@@ -1,9 +1,0 @@
-[Discord] Discord.Net v2.0.0-beta (API v6)
-[Rest] GET voice/regions: 187.76 ms
-[Gateway] Connecting
-[Rest] GET gateway: 22.8 ms
-[Gateway] Connected
-[Gateway] Connected to Tree World
-[Gateway] Connected to Bot Testing
-[GarlicBot] Bot is connected and running. Type "help" to see available console commands.
-[Gateway] Ready
