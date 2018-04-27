@@ -289,3 +289,5 @@ __pycache__/
 
 */config.json
 *.sln
+[Rr]esources/
+[Ll]ogs/
