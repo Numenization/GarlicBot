@@ -75,6 +75,6 @@ namespace GarlicBot
         /// <summary>
         /// List of IDs for all the specified bot administrators
         /// </summary>
-        public List<long> adminUsers = new List<long>();
+        public List<ulong> adminUsers = new List<ulong>();
     }
 }

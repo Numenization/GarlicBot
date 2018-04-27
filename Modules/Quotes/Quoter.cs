@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 
 namespace GarlicBot.Modules.Quotes
 {
@@ -11,7 +12,18 @@ namespace GarlicBot.Modules.Quotes
         [Command("addquote")]
         public async Task AddQuote(params string[] args)
         {
-            if(args.Length < 2)
+            SocketUser user = Context.User;
+            ulong id = user.Id;
+            if (!PermissionsManager.GetPerm(id, Permissions.MakeQuote)) {
+                var embed2 = new EmbedBuilder();
+                embed2.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
+                embed2.WithDescription(await Utilities.GetAlert("invalidPerms"));
+                embed2.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                embed2.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
+                await Context.Channel.SendMessageAsync("", false, embed2.Build());
+            }
+
+            if (args.Length < 2)
             {
                 return;
             }
@@ -40,7 +52,17 @@ namespace GarlicBot.Modules.Quotes
         public async Task Quote()
         {
             // we get the quote from the last message said by another person
-            //IDisposable dispose2 = Context.Channel.EnterTypingState();
+            SocketUser user = Context.User;
+            ulong id = user.Id;
+            if (!PermissionsManager.GetPerm(id, Permissions.MakeQuote)) {
+                var embed2 = new EmbedBuilder();
+                embed2.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
+                embed2.WithDescription(await Utilities.GetAlert("invalidPerms"));
+                embed2.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                embed2.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
+                await Context.Channel.SendMessageAsync("", false, embed2.Build());
+            }
+
             var messages = Context.Channel.GetMessagesAsync(5).Flatten();
             var enumerator = messages.GetEnumerator();
             await enumerator.MoveNext();
@@ -66,6 +88,17 @@ namespace GarlicBot.Modules.Quotes
         [Command("getquote")]
         public async Task GetQuoteRandom()
         {
+            SocketUser user = Context.User;
+            ulong id = user.Id;
+            if (!PermissionsManager.GetPerm(id, Permissions.GetQuote)) {
+                var embed2 = new EmbedBuilder();
+                embed2.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
+                embed2.WithDescription(await Utilities.GetAlert("invalidPerms"));
+                embed2.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                embed2.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
+                await Context.Channel.SendMessageAsync("", false, embed2.Build());
+            }
+
             Quote quote = QuoteManager.GetRandomQuote();
             var embed = new EmbedBuilder();
             embed.WithTitle(quote.author);

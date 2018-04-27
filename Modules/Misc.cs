@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 
 namespace GarlicBot.Modules
 {
@@ -85,7 +86,9 @@ namespace GarlicBot.Modules
 
         [Command("restart")]
         public async Task Restart() {
-            if((Context.User as IGuildUser).GuildPermissions.Administrator) {
+            SocketUser user = Context.User;
+            ulong id = user.Id;
+            if(PermissionsManager.GetPerm(id, Permissions.Restart)) {
                 var embed = new EmbedBuilder();
                 embed.WithDescription(String.Format(await Utilities.GetAlert("restartMessage"), Config.bot.botName));
                 embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
@@ -105,7 +108,9 @@ namespace GarlicBot.Modules
 
         [Command("shutdown")]
         public async Task Shutdown() {
-            if ((Context.User as IGuildUser).GuildPermissions.Administrator) {
+            SocketUser user = Context.User;
+            ulong id = user.Id;
+            if (PermissionsManager.GetPerm(id, Permissions.Shutdown)) {
                 var embed = new EmbedBuilder();
                 embed.WithDescription(String.Format(await Utilities.GetAlert("shutdownMessage"), Config.bot.botName));
                 embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));

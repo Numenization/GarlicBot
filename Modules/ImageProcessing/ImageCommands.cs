@@ -4,12 +4,25 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 
 namespace GarlicBot.Modules.ImageProcessing
 {
     public class ImageCommands : ModuleBase<SocketCommandContext> {
         [Command("scramble", RunMode = RunMode.Async)]
-        public async Task readImage() {
+        public async Task ScrambleAttachment() {
+            SocketUser user = Context.User;
+            ulong id = user.Id;
+            if (!PermissionsManager.GetPerm(id, Permissions.ProcessImage)) {
+                var embed = new EmbedBuilder();
+                embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
+                embed.WithDescription(await Utilities.GetAlert("invalidPerms"));
+                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
+                await Context.Channel.SendMessageAsync("", false, embed.Build());
+                return;
+            }
+
             var attachments = Context.Message.Attachments.GetEnumerator();
             if(attachments.MoveNext()) {
                 string url = attachments.Current.Url;
@@ -46,7 +59,19 @@ namespace GarlicBot.Modules.ImageProcessing
         }
 
         [Command("scramble", RunMode = RunMode.Async)]
-        public async Task readImageUrl([Remainder]string url) {
+        public async Task ScrambleURL([Remainder]string url) {
+            SocketUser user = Context.User;
+            ulong id = user.Id;
+            if (!PermissionsManager.GetPerm(id, Permissions.ProcessImage)) {
+                var embed = new EmbedBuilder();
+                embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
+                embed.WithDescription(await Utilities.GetAlert("invalidPerms"));
+                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
+                await Context.Channel.SendMessageAsync("", false, embed.Build());
+                return;
+            }
+
             var reader = new ImageReader();
             var error = new ImageReadError();
             var progress = new Progress<string>();

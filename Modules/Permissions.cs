@@ -18,7 +18,7 @@ namespace GarlicBot.Modules
             LoadPerms();
         }
 
-        public static bool GetPerm(long id, Permissions perm) {
+        public static bool GetPerm(ulong id, Permissions perm) {
             UserPerms perms;
             if(_perms.ContainsKey(id)) {
                 perms = _perms[id];
@@ -33,6 +33,8 @@ namespace GarlicBot.Modules
                         return perms.getQuote;
                     case Permissions.ProcessImage:
                         return perms.processImage;
+                    case Permissions.PermissionManagement:
+                        return perms.permissionManagement;
                     default:
                         return false;
                 }
@@ -42,8 +44,7 @@ namespace GarlicBot.Modules
             }
         }
 
-        public static bool AddPerms(long id, Permissions perm) {
-            // TODO: make this method save newly created permission objects to file
+        public static bool AddPerms(ulong id, Permissions perm) {
             UserPerms perms;
 
             if (_perms.ContainsKey(id)) {
@@ -71,14 +72,18 @@ namespace GarlicBot.Modules
                 case Permissions.ProcessImage:
                     perms.processImage = true;
                     break;
+                case Permissions.PermissionManagement:
+                    perms.permissionManagement = false;
+                    break;
                 default:
                     return false;
             }
+            SavePerms();
 
             return true;
         }
 
-        public static bool RemovePerms(long id, Permissions perm) {
+        public static bool RemovePerms(ulong id, Permissions perm) {
             UserPerms perms;
 
             if (_perms.ContainsKey(id)) {
@@ -104,6 +109,9 @@ namespace GarlicBot.Modules
                 case Permissions.ProcessImage:
                     perms.processImage = false;
                     break;
+                case Permissions.PermissionManagement:
+                    perms.permissionManagement = false;
+                    break;
                 default:
                     return false;
             }
@@ -111,16 +119,21 @@ namespace GarlicBot.Modules
             return true;
         }
 
+        private static void SavePerms() {
+            string json = JsonConvert.SerializeObject(_perms);
+            File.WriteAllText($"{_folder}/{_permsFile}", json);
+        }
+
         private static void LoadPerms() {
             string json = File.ReadAllText($"{_folder}/{_permsFile}");
-            _perms = JsonConvert.DeserializeObject<Dictionary<long, UserPerms>>(json);
+            _perms = JsonConvert.DeserializeObject<Dictionary<ulong, UserPerms>>(json);
         }
 
         private static void Initialize() {
-            Dictionary<long, UserPerms> temp = new Dictionary<long, UserPerms>();
+            Dictionary<ulong, UserPerms> temp = new Dictionary<ulong, UserPerms>();
             UserPerms basePerms = new UserPerms();
             temp.Add(0, basePerms);
-            foreach (long i in Config.bot.adminUsers) {
+            foreach (ulong i in Config.bot.adminUsers) {
                 UserPerms perms = new UserPerms();
                 perms.userID = i;
                 perms.getQuote = true;
@@ -128,26 +141,28 @@ namespace GarlicBot.Modules
                 perms.processImage = true;
                 perms.restart = true;
                 perms.makeQuote = true;
+                perms.permissionManagement = true;
                 temp.Add(i, perms);
             }
             string json = JsonConvert.SerializeObject(temp, Formatting.Indented);
             File.WriteAllText($"{_folder}/{_permsFile}", json);
         }
 
-        private static Dictionary<long, UserPerms> _perms;
+        private static Dictionary<ulong, UserPerms> _perms;
 
         private static string _folder = "Resources";
         private static string _permsFile = "permissions.json";
     }
 
-    public enum Permissions { Shutdown, Restart, MakeQuote, GetQuote, ProcessImage }
+    public enum Permissions { Shutdown, Restart, MakeQuote, GetQuote, ProcessImage, PermissionManagement }
 
     public class UserPerms {
-        public long userID = 0;
+        public ulong userID = 0;
         public bool shutdown = false;
         public bool restart = false;
         public bool makeQuote = false;
         public bool getQuote = false;
         public bool processImage = false;
+        public bool permissionManagement = false;
     }
 }
