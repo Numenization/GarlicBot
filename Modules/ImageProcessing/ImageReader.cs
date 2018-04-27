@@ -53,11 +53,15 @@ namespace GarlicBot.Modules.ImageProcessing
                 HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
                 long fileSize = webResponse.ContentLength;
                 string extension = Path.GetExtension(url);
+
                 if (fileSize <= (Config.bot.maxFileSize * kilobyteRatio)) { // max file size is in kilobytes, file size is given in bytes
                     WebClient client = new WebClient();
                     Stopwatch stopwatch = new Stopwatch();
-                    stopwatch.Start();
+                    MemoryStream ms;
+                    byte[] data;
                     long elapsedTimeSinceLastUpdate = 0;
+
+                    stopwatch.Start();
 
                     client.DownloadProgressChanged += (s, e) => {
                         if(stopwatch.ElapsedMilliseconds - elapsedTimeSinceLastUpdate >= Config.bot.progressUpdateDelay) {
@@ -67,9 +71,9 @@ namespace GarlicBot.Modules.ImageProcessing
                     };
 
                     _fileName = $"{DateTime.Now.ToFileTime()}";
-                    byte[] data = await client.DownloadDataTaskAsync(uri);
+                    data = await client.DownloadDataTaskAsync(uri);
                     progress.Report($"Download complete ({Math.Round((double)fileSize / kilobyteRatio)} KB).");
-                    MemoryStream ms;
+
                     try {
                         progress.Report($"Reading image data...");
                         ms = new MemoryStream(data);
@@ -83,6 +87,7 @@ namespace GarlicBot.Modules.ImageProcessing
                         error.ErrorReason = errorMsg;
                         return false;
                     }
+
                     stopwatch.Stop();
                 }
                 else {

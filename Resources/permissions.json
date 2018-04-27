@@ -1,0 +1,18 @@
+{
+  "0": {
+    "userID": 0,
+    "shutdown": false,
+    "restart": false,
+    "makeQuote": false,
+    "getQuote": false,
+    "processImage": false
+  },
+  "170750656510951424": {
+    "userID": 170750656510951424,
+    "shutdown": true,
+    "restart": true,
+    "makeQuote": true,
+    "getQuote": true,
+    "processImage": true
+  }
+}

@@ -40,15 +40,17 @@ namespace GarlicBot.Modules.ImageProcessing
         public async Task<string> Scramble(IProgress<double> progress) {
             if(_reader.Bitmap != null && _reader.Ready && !_working) {
                 //do stuff with image
-                _working = true;
-                await Utilities.LogAsync("Processing image...", Discord.LogSeverity.Info);
                 Bitmap bitmap = _reader.Bitmap;
                 Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
                 Random rand = new Random();
+                string newFileName = $"Resources/Images/{_reader.FileName}_Scrambled.jpg";
                 long totalPixels = bitmap.Width * (bitmap.Height / 2);
                 long lastUpdate = 0;
                 long pixelsProcessed = 0;
+
+                await Utilities.LogAsync("Processing image...", Discord.LogSeverity.Info);
+                stopwatch.Start();
+                _working = true;
 
                 for (int i = 0; i < bitmap.Width; i++) {
                     for (int j = 0; j < bitmap.Height / 2; j++) {
@@ -65,7 +67,6 @@ namespace GarlicBot.Modules.ImageProcessing
                     }
                 }
 
-                string newFileName = $"Resources/Images/{_reader.FileName}_Scrambled.jpg";
                 bitmap.Save(newFileName, ImageFormat.Jpeg);
                 stopwatch.Stop();
                 await Utilities.LogAsync($"Processing image complete. ({(double)stopwatch.ElapsedMilliseconds / 1000} s)", Discord.LogSeverity.Verbose);

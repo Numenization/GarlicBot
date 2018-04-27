@@ -40,6 +40,7 @@ namespace GarlicBot.Modules
         {
             int sides = 6;
             string pre = "";
+            Random r = new Random();
             try
             {
                 sides = int.Parse(message);
@@ -50,7 +51,6 @@ namespace GarlicBot.Modules
             }
             var embed = new EmbedBuilder();
             embed.WithTitle(String.Format(await Utilities.GetAlert("rollOutput"), sides));
-            Random r = new Random();
             int result = (r.Next() % sides) + 1;
             embed.WithDescription(String.Format(await Utilities.GetAlert("rollResult"), pre, result));
             embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
@@ -61,10 +61,10 @@ namespace GarlicBot.Modules
         [Command("roll")]
         public async Task Roll_NoArgs()
         {
+            Random r = new Random();
             int sides = 6;
             var embed = new EmbedBuilder();
             embed.WithTitle(String.Format(await Utilities.GetAlert("rollOutput"), sides));
-            Random r = new Random();
             int result = (r.Next() % sides) + 1;
             embed.WithDescription(String.Format(await Utilities.GetAlert("rollResult"), "", result));
             embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));

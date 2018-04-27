@@ -3,6 +3,7 @@ using System.IO;
 using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;
+using GarlicBot.Modules;
 using GarlicBot.Modules.Quotes;
 using GarlicBot.Modules.ImageProcessing;
 
@@ -37,8 +38,6 @@ namespace GarlicBot
                 // Bot is ready, initialize console command input
                 await Utilities.LogAsync("Bot is connected and running. Type \"help\" to see available console commands.", LogSeverity.Info);
             };
-
-            ImageReader image = new ImageReader(); // need this dont ask
 
             bool running = true;
             while (running) {

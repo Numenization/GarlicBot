@@ -1,0 +1,1 @@
+[GarlicBot] Authentication key missing! Press any key to exit

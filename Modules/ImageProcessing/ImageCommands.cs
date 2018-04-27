@@ -16,16 +16,20 @@ namespace GarlicBot.Modules.ImageProcessing
                 var reader = new ImageReader();
                 var error = new ImageReadError();
                 var progress = new Progress<string>();
+
                 progress.ProgressChanged += (s, e) => {
                     Utilities.Log(e, LogSeverity.Verbose);
                 };
+
                 if (await reader.ReadFromUrl(url, progress, error)) {
                     //do stuff with image
+                    ImageProcessor processor = new ImageProcessor(reader);
                     var processProgress = new Progress<double>();
+
                     processProgress.ProgressChanged += (s, e) => {
                         Utilities.Log($"Processing {e}%", LogSeverity.Verbose);
                     };
-                    ImageProcessor processor = new ImageProcessor(reader);
+
                     string file = await processor.Scramble(processProgress);
                     await Utilities.LogAsync("Sending file...", LogSeverity.Info);
                     await Context.Channel.SendFileAsync(file);
@@ -46,16 +50,19 @@ namespace GarlicBot.Modules.ImageProcessing
             var reader = new ImageReader();
             var error = new ImageReadError();
             var progress = new Progress<string>();
+
             progress.ProgressChanged += (s, e) => {
                 Utilities.Log(e, LogSeverity.Verbose);
             };
+
             if (await reader.ReadFromUrl(url, progress, error)) {
-                //do stuff with image
+                ImageProcessor processor = new ImageProcessor(reader);
                 var processProgress = new Progress<double>();
+
                 processProgress.ProgressChanged += (s, e) => {
                     Utilities.Log($"Processing {e}%", LogSeverity.Verbose);
                 };
-                ImageProcessor processor = new ImageProcessor(reader);
+
                 string file = await processor.Scramble(processProgress);
                 await Utilities.LogAsync("Sending file...", LogSeverity.Info);
                 await Context.Channel.SendFileAsync(file);

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using Discord;
 using Newtonsoft.Json;
 
@@ -71,5 +72,9 @@ namespace GarlicBot
         /// Number of milliseconds between progress updates
         /// </summary>
         public long progressUpdateDelay = 500;
+        /// <summary>
+        /// List of IDs for all the specified bot administrators
+        /// </summary>
+        public List<long> adminUsers = new List<long>();
     }
 }

@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
+    <OutputType>winexe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <StartupObject>GarlicBot.Program</StartupObject>
     <ApplicationIcon />
     <Win32Resource />
-    <Version>0.1</Version>
+    <Version>0.4.2</Version>
     <Authors>Nicholas Spencer</Authors>
     <Company />
   </PropertyGroup>
@@ -33,6 +33,10 @@
     <None Update="SystemLang\helpdata.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>
