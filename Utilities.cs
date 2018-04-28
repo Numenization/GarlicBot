@@ -44,8 +44,8 @@ namespace GarlicBot
 
         public static async Task SendMessage(string message, string title, SocketCommandContext context) {
             EmbedBuilder embed = new EmbedBuilder();
-            embed.WithTitle(message);
-            embed.WithDescription(title);
+            embed.WithDescription(message);
+            embed.WithTitle(title);
             embed.WithColor(await ParseColor(Config.bot.embedColor));
             embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
             await context.Channel.SendMessageAsync("", false, embed.Build());
