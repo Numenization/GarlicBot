@@ -13,13 +13,11 @@ namespace GarlicBot.Modules.ImageProcessing
         public async Task ScrambleAttachment() {
             SocketUser user = Context.User;
             ulong id = user.Id;
-            if (!PermissionsManager.GetPerm(id, Permissions.ProcessImage)) {
-                var embed = new EmbedBuilder();
-                embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                embed.WithDescription(await Utilities.GetAlert("invalidPerms"));
-                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                await Context.Channel.SendMessageAsync("", false, embed.Build());
+            if (!await PermissionsManager.GetPerm(id, Permissions.ProcessImage)) {
+                await Utilities.SendMessage(
+                    await Utilities.GetAlert("invalidPerms"), // message body
+                    await Utilities.GetAlert("commandErrorTitle"), // message title
+                    Context); // command context
                 return;
             }
 
@@ -35,7 +33,6 @@ namespace GarlicBot.Modules.ImageProcessing
                 };
 
                 if (await reader.ReadFromUrl(url, progress, error)) {
-                    //do stuff with image
                     ImageProcessor processor = new ImageProcessor(reader);
                     var processProgress = new Progress<double>();
 
@@ -48,12 +45,10 @@ namespace GarlicBot.Modules.ImageProcessing
                     await Context.Channel.SendFileAsync(file);
                 }
                 else {
-                    var embed = new EmbedBuilder();
-                    embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                    embed.WithDescription(error.ErrorReason);
-                    embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                    embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                    await Context.Channel.SendMessageAsync("", false, embed.Build());
+                    await Utilities.SendMessage(
+                        error.ErrorReason, // message body
+                        await Utilities.GetAlert("commandErrorTitle"), // message title
+                        Context); // command context
                 }
             }
         }
@@ -62,13 +57,11 @@ namespace GarlicBot.Modules.ImageProcessing
         public async Task ScrambleURL([Remainder]string url) {
             SocketUser user = Context.User;
             ulong id = user.Id;
-            if (!PermissionsManager.GetPerm(id, Permissions.ProcessImage)) {
-                var embed = new EmbedBuilder();
-                embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                embed.WithDescription(await Utilities.GetAlert("invalidPerms"));
-                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                await Context.Channel.SendMessageAsync("", false, embed.Build());
+            if (!await PermissionsManager.GetPerm(id, Permissions.ProcessImage)) {
+                await Utilities.SendMessage(
+                    await Utilities.GetAlert("invalidPerms"), // message body
+                    await Utilities.GetAlert("commandErrorTitle"), // message title
+                    Context); // command context
                 return;
             }
 
@@ -93,12 +86,10 @@ namespace GarlicBot.Modules.ImageProcessing
                 await Context.Channel.SendFileAsync(file);
             }
             else {
-                var embed = new EmbedBuilder();
-                embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                embed.WithDescription(error.ErrorReason);
-                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                await Context.Channel.SendMessageAsync("", false, embed.Build());
+                await Utilities.SendMessage(
+                    error.ErrorReason, // message body
+                    await Utilities.GetAlert("commandErrorTitle"), // message title
+                    Context); // command context
             }
         }
     }

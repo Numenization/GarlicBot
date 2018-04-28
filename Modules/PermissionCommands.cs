@@ -11,10 +11,20 @@ namespace GarlicBot.Modules
     public class PermissionCommands : ModuleBase<SocketCommandContext> {
         [Command("setperm")]
         public async Task SetPerm(params string[] args) {
-            if(args.Length >= 2) {
+            SocketUser commandUser = Context.User;
+            ulong commandId = commandUser.Id;
+            if (!await PermissionsManager.GetPerm(commandId, Permissions.PermissionManagement)) {
+                await Utilities.SendMessage(
+                    await Utilities.GetAlert("invalidPerms"), // message body
+                    await Utilities.GetAlert("commandErrorTitle"), // message title
+                    Context); // command context
+                return;
+            }
+
+            if (args.Length >= 2) {
                 string[] userparams = args[0].Split('#');
                 if (userparams.Length != 2)
-                    return; // invalid username
+                    return; // invalid username0
                 string username = userparams[0];
                 string discriminator = userparams[1];
                 Permissions perm;
@@ -40,13 +50,16 @@ namespace GarlicBot.Modules
                     case "processimage":
                         perm = Permissions.ProcessImage;
                         break;
+                    case "permissions":
+                        perm = Permissions.PermissionManagement;
+                        break;
                     default:
                         // invalid permission
                         return;
                 }
 
                 // give the user the permission
-                PermissionsManager.AddPerms(id, perm);
+                await PermissionsManager.AddPerms(id, perm);
             }
             else {
                 // invalid arguments

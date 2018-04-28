@@ -14,13 +14,11 @@ namespace GarlicBot.Modules.Quotes
         {
             SocketUser user = Context.User;
             ulong id = user.Id;
-            if (!PermissionsManager.GetPerm(id, Permissions.MakeQuote)) {
-                var embed2 = new EmbedBuilder();
-                embed2.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                embed2.WithDescription(await Utilities.GetAlert("invalidPerms"));
-                embed2.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                embed2.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                await Context.Channel.SendMessageAsync("", false, embed2.Build());
+            if (!await PermissionsManager.GetPerm(id, Permissions.MakeQuote)) {
+                await Utilities.SendMessage(
+                    await Utilities.GetAlert("invalidPerms"), // message body
+                    await Utilities.GetAlert("commandErrorTitle"), // message title
+                    Context); // command context
             }
 
             if (args.Length < 2)
@@ -40,12 +38,11 @@ namespace GarlicBot.Modules.Quotes
                 date = $"{now.Month}/{now.Day}/{now.Year} [{now.Hour}:{now.Minute}]"
             };
             QuoteManager.AddQuote(quote);
-            var embed = new EmbedBuilder();
-            embed.WithTitle(await Utilities.GetAlert("quoteAdded"));
-            embed.WithDescription(String.Format(await Utilities.GetAlert("quoteAddedBody"), quote.author));
-            embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-            embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-            await Context.Channel.SendMessageAsync("", false, embed.Build());
+
+            await Utilities.SendMessage(
+                String.Format(await Utilities.GetAlert("quoteAddedBody"), quote.author), // message body
+                await Utilities.GetAlert("quoteAdded"), // message title
+                Context); // command context
         }
 
         [Command("quote")]
@@ -54,13 +51,11 @@ namespace GarlicBot.Modules.Quotes
             // we get the quote from the last message said by another person
             SocketUser user = Context.User;
             ulong id = user.Id;
-            if (!PermissionsManager.GetPerm(id, Permissions.MakeQuote)) {
-                var embed2 = new EmbedBuilder();
-                embed2.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                embed2.WithDescription(await Utilities.GetAlert("invalidPerms"));
-                embed2.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                embed2.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                await Context.Channel.SendMessageAsync("", false, embed2.Build());
+            if (!await PermissionsManager.GetPerm(id, Permissions.MakeQuote)) {
+                await Utilities.SendMessage(
+                    await Utilities.GetAlert("invalidPerms"), // message body
+                    await Utilities.GetAlert("commandErrorTitle"), // message title
+                    Context); // command context
             }
 
             var messages = Context.Channel.GetMessagesAsync(5).Flatten();
@@ -76,13 +71,11 @@ namespace GarlicBot.Modules.Quotes
                 date = $"{now.Month}/{now.Day}/{now.Year} [{now.Hour}:{now.Minute}]"
             };
             QuoteManager.AddQuote(quote);
-            var embed = new EmbedBuilder();
-            embed.WithTitle(await Utilities.GetAlert("quoteAdded"));
-            embed.WithDescription(String.Format(await Utilities.GetAlert("quoteAddedBody"), quote.author));
-            embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-            embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-            await Context.Channel.SendMessageAsync("", false, embed.Build());
-            //dispose2.Dispose();
+
+            await Utilities.SendMessage(
+                String.Format(await Utilities.GetAlert("quoteAddedBody"), quote.author), // message body
+                await Utilities.GetAlert("quoteAdded"), // message title
+                Context); // command context
         }
 
         [Command("getquote")]
@@ -90,13 +83,11 @@ namespace GarlicBot.Modules.Quotes
         {
             SocketUser user = Context.User;
             ulong id = user.Id;
-            if (!PermissionsManager.GetPerm(id, Permissions.GetQuote)) {
-                var embed2 = new EmbedBuilder();
-                embed2.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                embed2.WithDescription(await Utilities.GetAlert("invalidPerms"));
-                embed2.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                embed2.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                await Context.Channel.SendMessageAsync("", false, embed2.Build());
+            if (!await PermissionsManager.GetPerm(id, Permissions.GetQuote)) {
+                await Utilities.SendMessage(
+                    await Utilities.GetAlert("invalidPerms"), // message body
+                    await Utilities.GetAlert("commandErrorTitle"), // message title
+                    Context); // command context
             }
 
             Quote quote = QuoteManager.GetRandomQuote();

@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Discord;
+using Discord.Commands;
 using Newtonsoft.Json;
 
 namespace GarlicBot
@@ -39,6 +40,15 @@ namespace GarlicBot
                 await LogAsync($"Could not find alert \"{key}\" in json!", LogSeverity.Error);
                 return "";
             }
+        }
+
+        public static async Task SendMessage(string message, string title, SocketCommandContext context) {
+            EmbedBuilder embed = new EmbedBuilder();
+            embed.WithTitle(message);
+            embed.WithDescription(title);
+            embed.WithColor(await ParseColor(Config.bot.embedColor));
+            embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
+            await context.Channel.SendMessageAsync("", false, embed.Build());
         }
 
         /// <summary>

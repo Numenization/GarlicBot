@@ -17,23 +17,19 @@ namespace GarlicBot.Modules
         [Command("echo")]
         public async Task Echo([Remainder]string message)
         {
-            var embed = new EmbedBuilder();
-            embed.WithTitle("Echo:");
-            embed.WithDescription(message);
-            embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-            embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-            await Context.Channel.SendMessageAsync("", false, embed.Build());
+            await Utilities.SendMessage(
+                message, // message body
+                "Echo:", // message title
+                Context); // command context
         }
 
         [Command("echo")]
         public async Task Echo_NoArgs()
         {
-            var embed = new EmbedBuilder();
-            embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-            embed.WithDescription(String.Format(await Utilities.GetAlert("commandTooFewArgs"), "echo"));
-            embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-            embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-            await Context.Channel.SendMessageAsync("", false, embed.Build());
+            await Utilities.SendMessage(
+                String.Format(await Utilities.GetAlert("commandTooFewArgs"), "echo"), // message body
+                await Utilities.GetAlert("commandErrorTitle"), // message title
+                Context); // command context
         }
 
         [Command("roll")]
@@ -50,13 +46,12 @@ namespace GarlicBot.Modules
             {
                 pre = await Utilities.GetAlert("rollCommandCouldntParse");
             }
-            var embed = new EmbedBuilder();
-            embed.WithTitle(String.Format(await Utilities.GetAlert("rollOutput"), sides));
             int result = (r.Next() % sides) + 1;
-            embed.WithDescription(String.Format(await Utilities.GetAlert("rollResult"), pre, result));
-            embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-            embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-            await Context.Channel.SendMessageAsync("", false, embed.Build());
+
+            await Utilities.SendMessage(
+                String.Format(await Utilities.GetAlert("rollResult"), pre, result), // message body
+                String.Format(await Utilities.GetAlert("rollOutput"), sides), // message title
+                Context); // command context
         }
 
         [Command("roll")]
@@ -64,13 +59,11 @@ namespace GarlicBot.Modules
         {
             Random r = new Random();
             int sides = 6;
-            var embed = new EmbedBuilder();
-            embed.WithTitle(String.Format(await Utilities.GetAlert("rollOutput"), sides));
             int result = (r.Next() % sides) + 1;
-            embed.WithDescription(String.Format(await Utilities.GetAlert("rollResult"), "", result));
-            embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-            embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-            await Context.Channel.SendMessageAsync("", false, embed.Build());
+            await Utilities.SendMessage(
+                String.Format(await Utilities.GetAlert("rollResult"), "", result), // message body
+                String.Format(await Utilities.GetAlert("rollOutput"), sides), // message title
+                Context); // command context
         }
 
         [Command("github")]
@@ -88,21 +81,18 @@ namespace GarlicBot.Modules
         public async Task Restart() {
             SocketUser user = Context.User;
             ulong id = user.Id;
-            if(PermissionsManager.GetPerm(id, Permissions.Restart)) {
-                var embed = new EmbedBuilder();
-                embed.WithDescription(String.Format(await Utilities.GetAlert("restartMessage"), Config.bot.botName));
-                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                await Context.Channel.SendMessageAsync("", false, embed.Build());
+            if(await PermissionsManager.GetPerm(id, Permissions.Restart)) {
+                await Utilities.SendMessage(
+                    String.Format(await Utilities.GetAlert("restartMessage"), Config.bot.botName), // message body
+                    "Restarting:", // message title
+                    Context); // command context
                 Program.Restart();
             }
             else {
-                var embed = new EmbedBuilder();
-                embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                embed.WithDescription(await Utilities.GetAlert("invalidPerms"));
-                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                await Context.Channel.SendMessageAsync("", false, embed.Build());
+                await Utilities.SendMessage(
+                    await Utilities.GetAlert("invalidPerms"), // message body
+                    await Utilities.GetAlert("commandErrorTitle"), // message title
+                    Context); // command context
             }
         }
 
@@ -110,21 +100,18 @@ namespace GarlicBot.Modules
         public async Task Shutdown() {
             SocketUser user = Context.User;
             ulong id = user.Id;
-            if (PermissionsManager.GetPerm(id, Permissions.Shutdown)) {
-                var embed = new EmbedBuilder();
-                embed.WithDescription(String.Format(await Utilities.GetAlert("shutdownMessage"), Config.bot.botName));
-                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                await Context.Channel.SendMessageAsync("", false, embed.Build());
+            if (await PermissionsManager.GetPerm(id, Permissions.Shutdown)) {
+                await Utilities.SendMessage(
+                    String.Format(await Utilities.GetAlert("shutdownMessage"), Config.bot.botName), // message body
+                    "Restarting:", // message title
+                    Context); // command context
                 Program.Shutdown();
             }
             else {
-                var embed = new EmbedBuilder();
-                embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
-                embed.WithDescription(await Utilities.GetAlert("invalidPerms"));
-                embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
-                embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
-                await Context.Channel.SendMessageAsync("", false, embed.Build());
+                await Utilities.SendMessage(
+                    await Utilities.GetAlert("invalidPerms"), // message body
+                    await Utilities.GetAlert("commandErrorTitle"), // message title
+                    Context); // command context
             }
         }
     }
