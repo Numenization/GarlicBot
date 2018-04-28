@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
@@ -43,7 +41,7 @@ namespace GarlicBot.Modules.ImageProcessing
                 Bitmap bitmap = _reader.Bitmap;
                 Stopwatch stopwatch = new Stopwatch();
                 Random rand = new Random();
-                string newFileName = $"Resources/Images/{_reader.FileName}_Scrambled.jpg";
+                string newFileName = $"Resources/Images/{_reader.FileName}-Scrambled.jpg";
                 long totalPixels = bitmap.Width * (bitmap.Height / 2);
                 long lastUpdate = 0;
                 long pixelsProcessed = 0;
