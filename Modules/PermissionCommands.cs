@@ -28,6 +28,7 @@ namespace GarlicBot.Modules
                             $"Couldn't get user",
                             "Permissions:",
                             Context);
+                        return;
                     }
 
                     ulong id = ulong.Parse(userMention.Substring(2, userMention.Length - 3));
@@ -77,6 +78,7 @@ namespace GarlicBot.Modules
                             $"Couldn't get user",
                             "Permissions:",
                             Context);
+                        return;
                     }
 
                     ulong id = ulong.Parse(userMention.Substring(2, userMention.Length - 3));
@@ -161,6 +163,7 @@ namespace GarlicBot.Modules
                             error, // message body
                             await Utilities.GetAlert("commandErrorTitle"), // message title
                             Context); // command context
+                        return;
                     }
 
                     await Utilities.SendMessage(
@@ -178,6 +181,7 @@ namespace GarlicBot.Modules
                             error, // message body
                             await Utilities.GetAlert("commandErrorTitle"), // message title
                             Context); // command context
+                        return;
                     }
                     await Utilities.SendMessage(
                         $"Group \"{groupName}\" removed",
@@ -194,6 +198,7 @@ namespace GarlicBot.Modules
                             $"Couldn't get user",
                             "Permissions:",
                             Context);
+                        return;
                     }
 
                     ulong id = ulong.Parse(userMention.Substring(2, userMention.Length - 3));
@@ -204,6 +209,7 @@ namespace GarlicBot.Modules
                             error, // message body
                             await Utilities.GetAlert("commandErrorTitle"), // message title
                             Context); // command context
+                        return;
                     }
 
                     await Utilities.SendMessage(
@@ -221,6 +227,7 @@ namespace GarlicBot.Modules
                             $"Couldn't get user",
                             "Permissions:",
                             Context);
+                        return;
                     }
 
                     ulong id = ulong.Parse(userMention.Substring(2, userMention.Length - 3));
@@ -231,6 +238,7 @@ namespace GarlicBot.Modules
                             error, // message body
                             await Utilities.GetAlert("commandErrorTitle"), // message title
                             Context); // command context
+                        return;
                     }
 
                     await Utilities.SendMessage(
@@ -278,6 +286,7 @@ namespace GarlicBot.Modules
                             error, // message body
                             await Utilities.GetAlert("commandErrorTitle"), // message title
                             Context); // command context
+                        return;
                     }
 
                     await Utilities.SendMessage(
@@ -323,6 +332,7 @@ namespace GarlicBot.Modules
                             "Group does not exist!", // message body
                             await Utilities.GetAlert("commandErrorTitle"), // message title
                             Context); // command context
+                        return;
                     }
 
                     bool status = PermissionsManager.Groups[groupName].GetPerm(perm);
@@ -341,6 +351,7 @@ namespace GarlicBot.Modules
                             "Group does not exist!", // message body
                             await Utilities.GetAlert("commandErrorTitle"), // message title
                             Context); // command context
+                        return;
                     }
 
                     PermissionGroup group = PermissionsManager.Groups[groupName];
@@ -352,6 +363,30 @@ namespace GarlicBot.Modules
                     await Utilities.SendMessage(
                         $"{groupName}: `{users}`",
                         "Permissions:",
+                        Context);
+                }
+                else if(args[0] == "getperms") {
+                    // group getperms groupname
+                    string groupName = args[1];
+                    if (!PermissionsManager.Groups.ContainsKey(groupName)) {
+                        await Utilities.SendMessage(
+                            "Group does not exist!", // message body
+                            await Utilities.GetAlert("commandErrorTitle"), // message title
+                            Context); // command context
+                        return;
+                    }
+
+                    PermissionGroup group = PermissionsManager.Groups[groupName];
+                    string permissions = "";
+                    foreach (Permissions perm in Enum.GetValues(typeof(Permissions))) {
+                        if(group.GetPerm(perm)) {
+                            permissions += $"{perm} ";
+                        }
+                    }
+
+                    await Utilities.SendMessage(
+                        $"`{permissions}`",
+                        "Permission Groups:",
                         Context);
                 }
                 else if(args[0] == "list") {
