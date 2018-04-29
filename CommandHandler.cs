@@ -36,6 +36,7 @@ namespace GarlicBot
                         embed.WithTitle(await Utilities.GetAlert("commandErrorTitle"));
                         embed.WithDescription(result.ErrorReason);
                         embed.WithColor(await Utilities.ParseColor(Config.bot.embedColor));
+                        embed.WithAuthor(Config.bot.botName, Config.bot.botIconURL);
                         await context.Channel.SendMessageAsync("", false, embed.Build());
                     }
                 }
