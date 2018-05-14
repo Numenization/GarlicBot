@@ -13,7 +13,7 @@ Some stuff it currently supports:
   - Scramble an image
 ---
 ## Installation Instructions
-1. Download here: https://github.com/Numenization/GarlicBot/releases/tag/0.1
+1. Download here: https://github.com/Numenization/GarlicBot/releases
 2. Unzip it somewhere
 3. Run it once to generate config file
    - On windows, run GarlicBot.bat

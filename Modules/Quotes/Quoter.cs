@@ -12,6 +12,7 @@ namespace GarlicBot.Modules.Quotes
         [Command("addquote")]
         public async Task AddQuote(params string[] args)
         {
+            // addquote author message
             SocketUser user = Context.User;
             ulong id = user.Id;
             if (!await PermissionsManager.GetPerm(id, Permissions.MakeQuote)) {

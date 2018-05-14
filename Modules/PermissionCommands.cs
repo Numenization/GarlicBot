@@ -132,7 +132,7 @@ namespace GarlicBot.Modules
             }
             catch {
                 await Utilities.SendMessage(
-                    String.Format(await Utilities.GetAlert("commandInvalidArgs"), "setperm"), // message body
+                    String.Format(await Utilities.GetAlert("commandInvalidArgs"), "perms"), // message body
                     await Utilities.GetAlert("commandErrorTitle"), // message title
                     Context); // command context
             }
@@ -400,7 +400,7 @@ namespace GarlicBot.Modules
             }
             catch {
                 await Utilities.SendMessage(
-                    String.Format(await Utilities.GetAlert("commandInvalidArgs"), "setperm"), // message body
+                    String.Format(await Utilities.GetAlert("commandInvalidArgs"), "group"), // message body
                     await Utilities.GetAlert("commandErrorTitle"), // message title
                     Context); // command context
             }
